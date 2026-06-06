@@ -101,12 +101,13 @@ nav a:hover::after, nav a.active::after { width: 100%; }
 }
 
 header.hero {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 60vh;
+    position: relative;
 }
 
 .profile-img-container {
