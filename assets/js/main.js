@@ -12,13 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
         entry.target.classList.add('visible');
         observer.unobserve(entry.target);
       }
-    });
-  }, observerOptions);
+      }, observerOptions);
 
   document.querySelectorAll('.fade-up').forEach(element => {
     observer.observe(element);
-  });
-
+  
   // Highlight active nav based on pathname
   const path = window.location.pathname;
   const page = path.split('/').pop() || 'index.html';
@@ -28,8 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
           link.classList.remove('active');
       }
-  });
-
+  
   // Modal Logic (only if modal exists on page)
   const modalOverlay = document.getElementById('project-modal');
   if(modalOverlay) {
@@ -165,9 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
             modalOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
           }
-        });
-      });
-
+              
       function closeModal() {
         modalOverlay.classList.remove('active');
         document.body.style.overflow = '';
@@ -176,54 +171,44 @@ document.addEventListener('DOMContentLoaded', () => {
       modalClose.addEventListener('click', closeModal);
       modalOverlay.addEventListener('click', (e) => {
         if(e.target === modalOverlay) closeModal();
-      });
-  }
+        }
 
 
+  
   // Interactive Cute Emoji Face Logic
   const face = document.getElementById('interactive-face');
   const pupils = document.querySelectorAll('.pupil');
   const mouth = document.getElementById('face-mouth');
   const navLinksList = document.querySelectorAll('nav a');
+  let emoteOverride = false;
 
   if (face && pupils.length > 0 && mouth) {
-      // Mouse tracking for eyes
       document.addEventListener('mousemove', (e) => {
-          // If we are currently hovering over a nav link, skip mouse tracking for the mouth
-          const isHoveringNav = Array.from(navLinksList).some(link => link.matches(':hover'));
-          
           const rect = face.getBoundingClientRect();
-          const faceCenterX = rect.left + rect.width / 2;
-          const faceCenterY = rect.top + rect.height / 2;
+          const faceX = rect.left + rect.width / 2;
+          const faceY = rect.top + rect.height / 2;
+          const dx = e.clientX - faceX;
+          const dy = e.clientY - faceY;
+          const dist = Math.sqrt(dx*dx + dy*dy);
 
-          const deltaX = e.clientX - faceCenterX;
-          const deltaY = e.clientY - faceCenterY;
-          const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-          // Move pupils smoothly
-          const angle = Math.atan2(deltaY, deltaX);
-          const maxMove = 8;
-          const moveX = Math.cos(angle) * Math.min(distance / 15, maxMove);
-          const moveY = Math.sin(angle) * Math.min(distance / 15, maxMove);
+          // Move pupils
+          const angle = Math.atan2(dy, dx);
+          const maxMove = 7;
+          const moveX = Math.cos(angle) * Math.min(dist / 12, maxMove);
+          const moveY = Math.sin(angle) * Math.min(dist / 12, maxMove);
 
           pupils.forEach(pupil => {
               pupil.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
           });
 
-          // Emote based on pointer distance/position ONLY if not hovering nav
-          if (!isHoveringNav) {
-              if (distance < 60) {
-                  // Surprised (mouse very close)
+          // Emote based on distance (if not hovered on nav or clicked)
+          if (!emoteOverride) {
+              if (dist < 70) {
                   mouth.className = 'mouth surprised';
-                  mouth.style.cssText = '';
-              } else if (deltaY < -150) {
-                  // Looking way up (neutral/thoughtful line)
+              } else if (dy < -120) {
                   mouth.className = 'mouth neutral';
-                  mouth.style.cssText = 'height: 8px; width: 25px; border-bottom: 6px solid var(--base03); border-radius: 10px; background: transparent;';
               } else {
-                  // Default cute smile
-                  mouth.className = 'mouth';
-                  mouth.style.cssText = '';
+                  mouth.className = 'mouth smile';
               }
           }
       });
@@ -231,42 +216,70 @@ document.addEventListener('DOMContentLoaded', () => {
       // Nav Hover Emotions
       navLinksList.forEach(link => {
           link.addEventListener('mouseenter', (e) => {
+              emoteOverride = true;
               const text = e.target.textContent.toLowerCase();
-              mouth.style.cssText = ''; 
-              if (text.includes('experience')) {
-                  // Proud / Confident face
-                  mouth.className = 'mouth proud';
-              } else if (text.includes('project')) {
-                  // Excited / Star-eyed logic
-                  mouth.className = 'mouth excited';
-              } else if (text.includes('contact')) {
-                  // Cute kissing / whistling face
-                  mouth.className = 'mouth kissing';
-              } else if (text.includes('intro')) {
-                  // Big welcoming smile
-                  mouth.className = 'mouth smile';
-              }
+              if (text.includes('experience')) mouth.className = 'mouth proud';
+              else if (text.includes('project')) mouth.className = 'mouth excited';
+              else if (text.includes('contact')) mouth.className = 'mouth kissing';
+              else if (text.includes('intro')) mouth.className = 'mouth smile';
           });
-          
           link.addEventListener('mouseleave', () => {
-              // Revert to normal
-              mouth.className = 'mouth';
-              mouth.style.cssText = '';
+              emoteOverride = false;
+              mouth.className = 'mouth smile';
           });
       });
 
       // Click emotion (blink and big smile)
       face.addEventListener('click', () => {
+          emoteOverride = true;
           mouth.className = 'mouth big-smile';
-          mouth.style.cssText = '';
-          
-          // Blink eyes
           const eyes = document.querySelectorAll('.eye');
-          eyes.forEach(eye => eye.classList.add('blink'));
+          eyes.forEach(e => e.classList.add('blink'));
+          
           setTimeout(() => { 
-              mouth.className = 'mouth'; 
-              eyes.forEach(eye => eye.classList.remove('blink'));
+              emoteOverride = false;
+              mouth.className = 'mouth smile'; 
+              eyes.forEach(e => e.classList.remove('blink'));
           }, 800);
+      });
+  }
+
+  // Grid Trail Logic
+  const gridContainer = document.getElementById('grid-trail');
+  if (gridContainer) {
+      let cols = 0, rows = 0;
+      const createGrid = () => {
+          gridContainer.innerHTML = '';
+          const size = 60; // 60px cell size
+          cols = Math.ceil(window.innerWidth / size);
+          rows = Math.ceil(window.innerHeight / size);
+          gridContainer.style.setProperty('--columns', cols);
+          gridContainer.style.setProperty('--rows', rows);
+          
+          for(let i=0; i<cols*rows; i++) {
+              const cell = document.createElement('div');
+              cell.className = 'grid-cell';
+              cell.addEventListener('mouseenter', () => {
+                  cell.classList.add('active');
+                  setTimeout(() => cell.classList.remove('active'), 150);
+              });
+              gridContainer.appendChild(cell);
+          }
+      };
+      createGrid();
+      window.addEventListener('resize', createGrid);
+  }
+
+  // Floating Shapes Parallax
+  const shapes = document.querySelectorAll('.floating-shape');
+  if (shapes.length > 0) {
+      document.addEventListener('mousemove', (e) => {
+          const x = (e.clientX / window.innerWidth - 0.5) * 40;
+          const y = (e.clientY / window.innerHeight - 0.5) * 40;
+          shapes.forEach((shape, index) => {
+              const speed = (index + 1) * 0.8;
+              shape.style.transform = `translate(${x * speed}px, ${y * speed}px) rotate(${x*1.5}deg)`;
+          });
       });
   }
 });

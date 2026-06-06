@@ -8,31 +8,46 @@
     <script src="assets/js/main.js" defer></script>
 </head>
 <body>
+    <div id="grid-trail"></div>
     <div class="bg-animation"></div>
+    
+    <!-- Floating Background Shapes -->
+    <div class="floating-shape shape-1">{}</div>
+    <div class="floating-shape shape-2">&lt;/&gt;</div>
+    <div class="floating-shape shape-3">#</div>
+
     <nav>
-        <a href="index.html">Intro</a>
+        <a href="index.html" class="active">Intro</a>
         <a href="experience.html">Experience</a>
         <a href="projects.html">Projects</a>
         <a href="git_projects.html">Git Projects</a>
         <a href="contact.html">Contact</a>
     </nav>
     <div class="container">
-
-        <section id="intro" class="page-section fade-up">
+        
+        <section id="intro" class="page-section fade-up" style="margin-top: 3rem;">
             <header class="hero">
+                <!-- Cute Interactive Face -->
                 <div class="interactive-face" id="interactive-face">
                     <div class="eye left-eye"><div class="pupil"></div></div>
                     <div class="eye right-eye"><div class="pupil"></div></div>
-                    <div class="mouth" id="face-mouth"></div>
+                    <div class="mouth smile" id="face-mouth"></div>
                 </div>
+
                 <h1>Hi, I am <span>K Shrinidhi Bhagavath</span>.</h1>
                 
-                <div style="font-size: 1.15rem; max-width: 800px; text-align: left; margin-top: 1rem; color: var(--text-main);">
+                <!-- Marquee Animation (Pizza Burger Style) -->
+                <div class="marquee-wrapper">
+                    <div class="marquee">
+                        <span>C++ ❋ GOLANG ❋ DISTRIBUTED PLATFORMS ❋ LOW-LEVEL SYSTEMS ❋ OPTIMIZATION ❋ KUBERNETES</span>
+                        <span>C++ ❋ GOLANG ❋ DISTRIBUTED PLATFORMS ❋ LOW-LEVEL SYSTEMS ❋ OPTIMIZATION ❋ KUBERNETES</span>
+                    </div>
+                </div>
+
+                <div style="font-size: 1.15rem; max-width: 800px; text-align: left; margin-top: 2rem; color: var(--text-main);">
                     <p style="margin-bottom: 1rem;">My target or dream work is specializing in low-level systems, distributed platforms, and optimization. Currently, my work is partially on distributed systems and platforms, but mainly focuses on automation, MCP integrations, tools, and infrastructure.</p>
                     <p>Outside of work, what I like to do is to read books, play PC games from time to time, exercise and reading manga, playing badminton with friends and cousins.</p>
                 </div>
-                
-                
             </header>
         </section>
 
