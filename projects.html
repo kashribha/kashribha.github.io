@@ -478,63 +478,72 @@ Iterator : Random Access Iterator</code></pre><h4>Complexity of Operation on ite
             }
     };
     
+    
+    console.log("Re-initializing indestructible click listeners.");
+    
     var m = document.getElementById('project-modal');
-    console.log("Modal element found:", m);
-    
-    if(!m) {
-        console.error("CRITICAL ERROR: Modal element not found in DOM.");
-        return;
-    }
-    
     var b = m.querySelector('.modal-body');
     var c = m.querySelector('.modal-close');
-    console.log("Modal body found:", b);
-    console.log("Modal close found:", c);
     
-    var cards = document.querySelectorAll('.project-card');
-    console.log("Found cards:", cards.length);
+    // Nuke and pave all existing cards to destroy hidden event listeners
+    var cardsContainer = document.querySelector('.projects-grid');
+    var oldCards = Array.from(document.querySelectorAll('.project-card'));
     
-    cards.forEach(function(card) {
+    oldCards.forEach(function(card) {
         var clone = card.cloneNode(true);
+        // Force visual feedback that JS has touched the card
+        clone.style.border = "2px solid transparent";
+        clone.style.cursor = "pointer";
+        clone.style.position = "relative";
+        clone.style.zIndex = "10";
+        
         card.parentNode.replaceChild(clone, card);
-        clone.style.cursor = 'pointer';
         
         clone.addEventListener('click', function(e) {
             e.preventDefault();
+            e.stopPropagation(); // Stop any other listeners
             var id = this.getAttribute('data-project');
-            console.log("Card clicked, ID:", id);
+            console.log("✅ FORCED CLICK REGISTERED! ID:", id);
             
             if(pData[id]) {
-                console.log("Data found for ID:", id, "Setting HTML...");
+                console.log("✅ Data found, opening modal.");
                 b.innerHTML = '<div>' + pData[id].desc + '</div>';
                 
-                console.log("Applying styles to modal...");
-                // Force CSS updates directly on the element
-                m.style.cssText = "display: flex !important; position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; background: rgba(0, 0, 0, 0.8) !important; z-index: 999999 !important; align-items: center !important; justify-content: center !important;";
+                // Nuclear CSS override
+                m.setAttribute('style', 'display: flex !important; position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; background: rgba(0, 43, 54, 0.85) !important; backdrop-filter: blur(8px) !important; z-index: 2147483647 !important; align-items: center !important; justify-content: center !important; opacity: 1 !important;');
                 
                 document.body.style.overflow = 'hidden';
-                console.log("Modal display complete.");
             } else {
-                console.error("No data found in pData dictionary for ID:", id);
+                console.error("❌ Data missing for ID:", id);
             }
+        });
+        
+        // Add a secondary listener just on the image/content wrapper inside to be safe
+        clone.querySelectorAll('*').forEach(function(child) {
+            child.style.pointerEvents = "none"; // Force clicks to fall through to the main card
         });
     });
     
     if(c) {
-        c.addEventListener('click', function() {
-            console.log("Close button clicked.");
-            m.style.cssText = "display: none !important;";
+        c.addEventListener('click', function(e) {
+            console.log("✅ Close button clicked.");
+            e.preventDefault();
+            e.stopPropagation();
+            m.setAttribute('style', 'display: none !important;');
             document.body.style.overflow = '';
         });
     }
     
     m.addEventListener('click', function(e) {
         if(e.target === m) {
-            console.log("Background clicked, closing.");
-            m.style.cssText = "display: none !important;";
+            console.log("✅ Background clicked.");
+            m.setAttribute('style', 'display: none !important;');
             document.body.style.overflow = '';
         }
     });
+    
+    console.log("Initialization complete. Replaced " + oldCards.length + " cards.");
+
 });
 </script>
 
