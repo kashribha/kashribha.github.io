@@ -376,455 +376,18 @@ body.modal-open {
 
 
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    console.log("Modal script loaded.");
-    
-    var pData = {
-            'cert-rotation': {
-                desc: '<h2 class="major">Emergency Certificate Rotation (CPS)</h2><p>Designed and built an automated certificate rotation pipeline for Akamai\'s Certificate Provisioning System (CPS). When a Certificate Authority marks a specific batch of certificates as vulnerable, this system kicks in to rotate them securely without manual intervention, drastically reducing toil and improving security posture.</p>'
-            },
-            'delivery-automation': {
-                desc: '<h2 class="major">Software Delivery Automation</h2><p>Architected a full-stack application for end-to-end deployment, testing, and monitoring across multiple internal Akamai services.</p><p>This automation significantly streamlines the delivery pipeline by removing manual bottlenecks and unifying disparate workflows.</p><ul><li>Reduced weekly manual toil by <strong>95%</strong> (from 3 hours to 9 minutes).</li><li>Unified deployment workflows across multiple internal services.</li><li>Built robust end-to-end testing and monitoring hooks.</li></ul>'
-            },
-            'mcp-oauth': {
-                desc: '<h2 class="major">MCP Integrations for Akamai Internal Services & Edgegrid</h2><p>Developed multiple Model Context Protocol (MCP) servers to bridge Akamai\'s infrastructure with AI tooling:</p><ol><li><strong>OAuth2 & Telemetry:</strong> Built an MCP with robust OAuth2 handling and user-level monitoring tailored for internal applications and services used by Akamai employees.</li><li><strong>Edgegrid MCP:</strong> Engineered an MCP specifically targeting Akamai Products that leverage Edgegrid APIs, exposing capabilities to secure AI environments.</li></ol>'
-            },
-            'log-analysis': {
-                desc: '<h2 class="major">LOW LATENCY LOG ANALYSIS AND VISUALIZATION</h2><ol><li>Developed efficient way to analyse millions of rows and dynamically update top 5% CP Code for all the service provided by Akamai.</li><li>Created job for inserting hourly and daily aggregation of all metrics to the database optimally.</li><li>Working on automated analysis and reporting of probable cause for any anomaly seen in the service.</li><li>Currently using Clickhouse as intermediatary databse and Apache Superset for visualization</li></ol><p>On Going Project ...</p>'
-            },
-            'automation-library': {
-                desc: '<h2 class="major">Python Automation Library</h2><ul><li>Developed python interface for Grafana and databases like Clickhouse and modified Apache Cassandra. Added functionality to provide baselines for the metrics extracted from monitoring tools.</li><li>Managed application and created visual representation for metrics provided from the application.</li><li>Working on automated data analysis and visualization of low latency logs from Akamai network</li></ul>'
-            },
-            'trie-index': {
-                desc: '<h2 class="major">Trie-Based Inverted Index Engine</h2><p>Using trie data structure to store inverted index and results in faster document search engine of words and wild cards.</p>'
-            },
-            'ltree': {
-                desc: '<h2 class="major">Introduction to Fast Data Structure LTree</h2><h3 class="major">Introduction</h3><p>The chosen data structure is called LTree. Ltree grows like a tree and children are stored as a list, hence the name LTree (L -> list and Tree). This data structure is inspired by a data structure called VList which means vector of list. Our LTree is similar in some way but makes insertion faster.</p><p><h3><a href="https://github.com/kaybee1928/Ltree">GitHub - https://github.com/kaybee1928/Ltree</a></h3></p><h3 class="major">Summary</h3><p>As mentioned before LTree has a data part and stores children in the form of a list. Number of elements in children grows exponentially i.e., 1, 2, 4, 8, ... . (child-1 has 1 element, child-2 has 2 elements, child-3 has 4 elements, child-4 has 8 elements, …). This data structure can be used when we need fast random access along with fast insertion.</p><pre><code>Let m = log(n)+log(n/2)+log(n/4)... until log gives 1.
-for 2^64 = 18446744073709551616 elements we get m = 64+63+...+1 = 2080
-Iterator : Random Access Iterator</code></pre><h4>Complexity of Operation on iterator and Object:</h4><table><tr><th>Operator</th><th>Complexity</th></tr><tr><td>++, --</td><td>O(1)</td></tr><tr><td>+x, -x</td><td>O(1) best case, O(m) worst_case</td></tr><tr><td>-iterator</td><td>O(m)</td></tr><tr><td>Insertion at given position</td><td>O(m)</td></tr><tr><td>push_back</td><td>O(1) Best case,O(log(n)) worst case</td></tr><tr><td>pop, indexing</td><td>O(m)</td></tr></table><h3 class="major">Example</h3><p>For data = {1, 4, 5, 6, 8, 9, 10, 3, 2, 5, 12}, LTree is in below figure</p><div style="text-align: center;"><img src="images/ltree2.png" alt="ltree main Example" /></div>'
-            },
-            'rnn-captioning': {
-                desc: '<h2 class="major">Internship at CDSAML, PES University</h2><p>CDSAML(Center for Data Sciences and Applied Machine Learning)</p><ul><li>Implemented a model with hierarchical recurrent neural network to generate descriptive paragraph on an image. The model has a sentence RNN receives the image features, decides how many sentences to generate in the resulting paragraph, and produces an input topic vector for each sentence. This topic vector is then used by word RNN to generate the words of a single sentence. Predicted sentence had 13.6 METEOR score and BLEU-1 of 34.4%.</li></ul>'
-            },
-            'sort': {
-                desc: '<h2 class="major">Fast Merge Sort (ARootSort)</h2><p>ARoot Sort is a highly optimised merge sort which performes two different kinds of merge sort based on degree of sortedness of input after subarray reversing. It is a stable sort and outperforms std::sort that implements introsort by a small margin</p><p><h3><a href="https://github.com/kaybee1928/ARoot-Sort">GitHub - https://github.com/kaybee1928/ARoot-Sort</a></h3></p><h3 class="major">Algorithm</h3><h4>ARootSort</h4><pre><code>1. array_iterator_1 = 0;
-2. array_iterator_2 = start + 1;
-//It is not proved to be optimal, just intuitively taken
-3. optimal_near_sorted_parameter = (log(end-start)/log(2));
-4. number_of_decreasing_subarray = 0;
-5. for iterator = start + 1 to end
-        while (array_iterator_2 < end) &&
-               (array[array_iterator_2 - 1] > array[array_iterator_2]) do
-            array_iterator_2++;
-        if array_iterator_2 - array_iterator_1 > 1 then
-            arrayReverse(array ,array_iterator_1, array_iterator_2);
-            number_of_decreasing_subarray++;
-        array_iterator_1 = array_iterator_2;
-6. if number_of_decreasing_subarray <= optimal_near_sorted_parameter then
-        ARootMergeV1(array, start, end);
-7. else
-        ARootMergeV2(array, start, end);</code></pre><h4>ARootMergerV1 (a[] , p , q):</h4><pre><code>1. merge_iterator_start = start;
-2. merge_iterator_middle = start;
-3. merge_iterator_end = start + 1;
-4. isMerge = false;
-5. number_of_sorted_subarray = 0;
-6. while true do
-        while (merge_iterator_end < end) &&
-              (array[merge_iterator_end] >= array[merge_iterator_end - 1]) do
-            merge_iterator_end++;
-        if isMerge then
-            Merge(array, merge_iterator_start, merge_iterator_middle, merge_iterator_end);
-            merge_iterator_start = merge_iterator_end;
-            merge_iterator_end++;
-            isMerge = false;
-        else
-            isMerge = true;
-            merge_iterator_middle = merge_iterator_end;
-            merge_iterator_end++;
-            number_of_sorted_subarray++;
-            if merge_iterator_middle >= end then
-                if number_of_sorted_subarray < 2 then
-                    return;
-                else
-                    number_of_sorted_subarray = 0;
-                    merge_iterator_start = start;
-                    merge_iterator_middle = start;
-                    merge_iterator_end = start + 1;
-                    isMerge = false;</code></pre><h4>ARootMergerV2 (a[] , p , q):</h4><pre><code>1. merge_iterator_start = 0;
-2. merge_iterator_middle = 0;
-3. merge_iterator_end = 0;
-4. step_counter = 1;
-5. list sorted_subarray_end_points;
-6. sorted_subarray_end_points.add(0);
-7. for iterator = start + 1 to end
-        while (iterator < end) && (array[iterator] >= array[iterator - 1]) do
-            iterator++;
-        sorted_subarray_end_points.add(iterator);
-8. if sorted_subarray_end_points[sorted_subarray_end_points.size() - 1] != end then
-        sorted_subarray_end_points.add(end);
-9. number_of_sorted_subarray = (int)sorted_subarray_end_points.size() - 1;
-10. while true do
-        merge_iterator_start = 0;
-        merge_iterator_middle = merge_iterator_start + step_counter;
-        merge_iterator_end = minimim(merge_iterator_middle + step_counter, number_of_sorted_subarray);
-        if merge_iterator_middle >= number_of_sorted_subarray then
-            return
-        while merge_iterator_middle < number_of_sorted_subarray do
-            Merge(array, sorted_subarray_end_points[merge_iterator_start], sorted_subarray_end_points[merge_iterator_middle], sorted_subarray_end_points[merge_iterator_end]);
-            merge_iterator_start = merge_iterator_end;
-            merge_iterator_middle = merge_iterator_start + step_counter;
-            merge_iterator_end = minimum(merge_iterator_middle + step_counter, number_of_sorted_subarray);
-        step_counter = step_counter * 2</code></pre>'
-            },
-            'depth': {
-                desc: '<h2 class="major">EXTRACTING AND RENDERING 3D STRUCTURE AND ORIENTATION OF OBJECTS FROM 2D IMAGES</h2><h3 class="major">Abstract</h3><p>This work explores extraction of spatial orientation and geometric structure of objects and landscapes from 2D images using Deep Neural Networks and Stereo Vision based approaches, to render the structure in 3D space to aid in various application in the field of Virtual and Augmented Reality. Regular 2D images are used to generate a Depth Map using Deep Neural Networks or Stereo Vision, which can then be used to model the 3D structure of the objects in the image.</p><h3 class="major">Introduction</h3><p>Representation of the world in a three dimensional form virtually has various advantages in the field of medical modelling, terrain mapping and building realistic maps for multi player video games. It could be used to aid doctors in creating simulations of surgical procedures. Three dimensional terrain mapping could potentially help defense personnel understand the terrain in treacherous regions. Furthermore, 3d modelling could aid video game enthusiasts in providing realistic gaming experiance.</p><p>This work aims to obtain 3D Point Clouds of real-world objects, using only 2D images of the object, without the aid of any special sensors such as the Kinect sensor. This can be done by generating multiple Depth Maps of the various images taken of the object from various viewpoints and using those Depth Maps to generate a 3D Point Cloud of the object.</p><p>Existing techniques to generate/render 3D structure and orientation of objects from 2D images use a combination of interpolation algorithms and Deep Learning Models based on Convolution Neural Networks. Convolution Neural Networks deal with scalars and focus on the features in the images as opposed to orientations. This leads to issues such as inaccurate depth and noise and holes in the output when generating the Depth Maps of the Input Images as can be observed.</p><h3 class="major">GitHub Links</h3><p><h4><a href="https://github.com/kaybee1928/2Dto3D">GitHub - https://github.com/kaybee1928/2Dto3D</a></h4><h4>Forked from our main project repository:</h4><h4><a href="https://github.com/Its-a-me-Ashwin/2Dto3D">GitHub - https://github.com/Its-a-me-Ashwin/2Dto3D</a></h4></p>'
-            },
-            'compiler': {
-                desc: '<h2 class="major">Compiler Design</h2><p>Simple working compiler for C type language. Supports use of while loop and conditional statement and optimises the code by removing unwanted lines and variables.</p>'
-            },
-            'mscloud': {
-                desc: '<h2 class="major">Database orchestrator with master-slave architecture</h2><p>Implemented highly available and fault tolerant Database as a Service using master-slave architecture</p>'
-            },
-            'peuler': {
-                desc: '<h2 class="major">Project Euler</h2><p>Mathemaical problems solved with coding. This involves using many algorithms and mathematical formlae to overcome the high complexity of the problem.</p>'
-            }
-    };
-    
-    
-    console.log("Re-initializing indestructible click listeners.");
-    
-    var m = document.getElementById('project-modal');
-    var b = m.querySelector('.modal-body');
-    var c = m.querySelector('.modal-close');
-    
-    // Nuke and pave all existing cards to destroy hidden event listeners
-    var cardsContainer = document.querySelector('.projects-grid');
-    var oldCards = Array.from(document.querySelectorAll('.project-card'));
-    
-    oldCards.forEach(function(card) {
-        var clone = card.cloneNode(true);
-        // Force visual feedback that JS has touched the card
-        clone.style.border = "2px solid transparent";
-        clone.style.cursor = "pointer";
-        clone.style.position = "relative";
-        clone.style.zIndex = "10";
-        
-        card.parentNode.replaceChild(clone, card);
-        
-        clone.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation(); // Stop any other listeners
-            var id = this.getAttribute('data-project');
-            console.log("✅ FORCED CLICK REGISTERED! ID:", id);
-            
-            if(pData[id]) {
-                console.log("✅ Data found, opening modal.");
-                b.innerHTML = '<div>' + pData[id].desc + '</div>';
-                
-                // Nuclear CSS override
-                m.setAttribute('style', 'display: flex !important; position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; background: rgba(0, 43, 54, 0.85) !important; backdrop-filter: blur(8px) !important; z-index: 2147483647 !important; align-items: center !important; justify-content: center !important; opacity: 1 !important;');
-                
-                document.body.style.overflow = 'hidden';
-            } else {
-                console.error("❌ Data missing for ID:", id);
-            }
-        });
-        
-        // Add a secondary listener just on the image/content wrapper inside to be safe
-        clone.querySelectorAll('*').forEach(function(child) {
-            child.style.pointerEvents = "none"; // Force clicks to fall through to the main card
-        });
-    });
-    
-    if(c) {
-        c.addEventListener('click', function(e) {
-            console.log("✅ Close button clicked.");
-            e.preventDefault();
-            e.stopPropagation();
-            m.setAttribute('style', 'display: none !important;');
-            document.body.style.overflow = '';
-        });
-    }
-    
-    m.addEventListener('click', function(e) {
-        if(e.target === m) {
-            console.log("✅ Background clicked.");
-            m.setAttribute('style', 'display: none !important;');
-            document.body.style.overflow = '';
-        }
-    });
-    
-    console.log("Initialization complete. Replaced " + oldCards.length + " cards.");
-
-});
-</script>
 
 
 
-    <!-- DYNAMIC MODALS (HARDCODED IN HTML) -->
-    
-    <div class="modal-overlay" id="modal-cert-rotation">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modal-cert-rotation')">X</button>
-            <div class="modal-body">
-                <h2 class="major">Emergency Certificate Rotation (CPS)</h2>
-                <p>Designed and built an automated certificate rotation pipeline for Akamai's Certificate Provisioning System (CPS). When a Certificate Authority marks a specific batch of certificates as vulnerable, this system kicks in to rotate them securely without manual intervention, drastically reducing toil and improving security posture.</p>
-            </div>
-        </div>
-    </div>
 
-    <div class="modal-overlay" id="modal-delivery-automation">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modal-delivery-automation')">X</button>
-            <div class="modal-body">
-                <h2 class="major">Software Delivery Automation</h2>
-                <p>Architected a full-stack application for end-to-end deployment, testing, and monitoring across multiple internal Akamai services.</p>
-                <p>This automation significantly streamlines the delivery pipeline by removing manual bottlenecks and unifying disparate workflows.</p>
-                <ul>
-                    <li>Reduced weekly manual toil by <strong>95%</strong> (from 3 hours to 9 minutes).</li>
-                    <li>Unified deployment workflows across multiple internal services.</li>
-                    <li>Built robust end-to-end testing and monitoring hooks.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
 
-    <div class="modal-overlay" id="modal-mcp-oauth">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modal-mcp-oauth')">X</button>
-            <div class="modal-body">
-                <h2 class="major">MCP Integrations for Akamai Internal Services & Edgegrid</h2>
-                <p>Developed multiple Model Context Protocol (MCP) servers to bridge Akamai's infrastructure with AI tooling:</p>
-                <ol>
-                    <li><strong>OAuth2 & Telemetry:</strong> Built an MCP with robust OAuth2 handling and user-level monitoring tailored for internal applications and services used by Akamai employees.</li>
-                    <li><strong>Edgegrid MCP:</strong> Engineered an MCP specifically targeting Akamai Products that leverage Edgegrid APIs, exposing capabilities to secure AI environments.</li>
-                </ol>
-            </div>
-        </div>
-    </div>
 
-    <div class="modal-overlay" id="modal-log-analysis">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modal-log-analysis')">X</button>
-            <div class="modal-body">
-                <h2 class="major">LOW LATENCY LOG ANALYSIS AND VISUALIZATION</h2>
-                <ol>
-                    <li>Developed efficient way to analyse millions of rows and dynamically update top 5% CP Code for all the service provided by Akamai.</li>
-                    <li>Created job for inserting hourly and daily aggregation of all metrics to the database optimally.</li>
-                    <li>Working on automated analysis and reporting of probable cause for any anomaly seen in the service.</li>
-                    <li>Currently using Clickhouse as intermediatary databse and Apache Superset for visualization</li>
-                </ol>
-                <p>On Going Project ...</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="modal-automation-library">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modal-automation-library')">X</button>
-            <div class="modal-body">
-                <h2 class="major">Python Automation Library</h2>
-                <ul>
-                    <li>Developed python interface for Grafana and databases like Clickhouse and modified Apache Cassandra. Added functionality to provide baselines for the metrics extracted from monitoring tools.</li>
-                    <li>Managed application and created visual representation for metrics provided from the application.</li>
-                    <li>Working on automated data analysis and visualization of low latency logs from Akamai network</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="modal-trie-index">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modal-trie-index')">X</button>
-            <div class="modal-body">
-                <h2 class="major">Trie-Based Inverted Index Engine</h2>
-                <p>Using trie data structure to store inverted index and results in faster document search engine of words and wild cards.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="modal-ltree">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modal-ltree')">X</button>
-            <div class="modal-body">
-                <h2 class="major">Introduction to Fast Data Structure LTree</h2>
-                <h3 class="major">Introduction</h3>
-                <p>The chosen data structure is called LTree. Ltree grows like a tree and children are stored as a list, hence the name LTree (L -> list and Tree). This data structure is inspired by a data structure called VList which means vector of list. Our LTree is similar in some way but makes insertion faster.</p>
-                <p><h3><a href="https://github.com/kaybee1928/Ltree">GitHub - https://github.com/kaybee1928/Ltree</a></h3></p>
-                <h3 class="major">Summary</h3>
-                <p>As mentioned before LTree has a data part and stores children in the form of a list. Number of elements in children grows exponentially i.e., 1, 2, 4, 8, ... . (child-1 has 1 element, child-2 has 2 elements, child-3 has 4 elements, child-4 has 8 elements, …). This data structure can be used when we need fast random access along with fast insertion.</p>
-                <pre><code>Let m = log(n)+log(n/2)+log(n/4)... until log gives 1.
-for 2^64 = 18446744073709551616 elements we get m = 64+63+...+1 = 2080
-Iterator : Random Access Iterator</code></pre>
-                <h4>Complexity of Operation on iterator and Object:</h4>
-                <table>
-                    <tr><th>Operator</th><th>Complexity</th></tr>
-                    <tr><td>++, --</td><td>O(1)</td></tr>
-                    <tr><td>+x, -x</td><td>O(1) best case, O(m) worst_case</td></tr>
-                    <tr><td>-iterator</td><td>O(m)</td></tr>
-                    <tr><td>Insertion at given position</td><td>O(m)</td></tr>
-                    <tr><td>push_back</td><td>O(1) Best case,O(log(n)) worst case</td></tr>
-                    <tr><td>pop, indexing</td><td>O(m)</td></tr>
-                </table>
-                <h3 class="major">Example</h3>
-                <p>For data = {1, 4, 5, 6, 8, 9, 10, 3, 2, 5, 12}, LTree is in below figure</p>
-                <div style="text-align: center;"><img src="images/ltree2.png" alt="ltree main Example" /></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="modal-rnn-captioning">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modal-rnn-captioning')">X</button>
-            <div class="modal-body">
-                <h2 class="major">Internship at CDSAML, PES University</h2>
-                <p>CDSAML(Center for Data Sciences and Applied Machine Learning)</p>
-                <ul>
-                    <li>Implemented a model with hierarchical recurrent neural network to generate descriptive paragraph on an image. The model has a sentence RNN receives the image features, decides how many sentences to generate in the resulting paragraph, and produces an input topic vector for each sentence. This topic vector is then used by word RNN to generate the words of a single sentence. Predicted sentence had 13.6 METEOR score and BLEU-1 of 34.4%.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="modal-sort">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modal-sort')">X</button>
-            <div class="modal-body">
-                <h2 class="major">Fast Merge Sort (ARootSort)</h2>
-                <p>ARoot Sort is a highly optimised merge sort which performes two different kinds of merge sort based on degree of sortedness of input after subarray reversing. It is a stable sort and outperforms std::sort that implements introsort by a small margin</p>
-                <p><h3><a href="https://github.com/kaybee1928/ARoot-Sort">GitHub - https://github.com/kaybee1928/ARoot-Sort</a></h3></p>
-                <h3 class="major">Algorithm</h3>
-                <h4>ARootSort</h4>
-                <pre><code>1. array_iterator_1 = 0;
-2. array_iterator_2 = start + 1;
-//It is not proved to be optimal, just intuitively taken
-3. optimal_near_sorted_parameter = (log(end-start)/log(2));
-4. number_of_decreasing_subarray = 0;
-5. for iterator = start + 1 to end
-        while (array_iterator_2 < end) &&
-               (array[array_iterator_2 - 1] > array[array_iterator_2]) do
-            array_iterator_2++;
-        if array_iterator_2 - array_iterator_1 > 1 then
-            arrayReverse(array ,array_iterator_1, array_iterator_2);
-            number_of_decreasing_subarray++;
-        array_iterator_1 = array_iterator_2;
-6. if number_of_decreasing_subarray <= optimal_near_sorted_parameter then
-        ARootMergeV1(array, start, end);
-7. else
-        ARootMergeV2(array, start, end);</code></pre>
-                <h4>ARootMergerV1 (a[] , p , q):</h4>
-                <pre><code>1. merge_iterator_start = start;
-2. merge_iterator_middle = start;
-3. merge_iterator_end = start + 1;
-4. isMerge = false;
-5. number_of_sorted_subarray = 0;
-6. while true do
-        while (merge_iterator_end < end) &&
-              (array[merge_iterator_end] >= array[merge_iterator_end - 1]) do
-            merge_iterator_end++;
-        if isMerge then
-            Merge(array, merge_iterator_start, merge_iterator_middle, merge_iterator_end);
-            merge_iterator_start = merge_iterator_end;
-            merge_iterator_end++;
-            isMerge = false;
-        else
-            isMerge = true;
-            merge_iterator_middle = merge_iterator_end;
-            merge_iterator_end++;
-            number_of_sorted_subarray++;
-            if merge_iterator_middle >= end then
-                if number_of_sorted_subarray < 2 then
-                    return;
-                else
-                    number_of_sorted_subarray = 0;
-                    merge_iterator_start = start;
-                    merge_iterator_middle = start;
-                    merge_iterator_end = start + 1;
-                    isMerge = false;</code></pre>
-                <h4>ARootMergerV2 (a[] , p , q):</h4>
-                <pre><code>1. merge_iterator_start = 0;
-2. merge_iterator_middle = 0;
-3. merge_iterator_end = 0;
-4. step_counter = 1;
-5. list sorted_subarray_end_points;
-6. sorted_subarray_end_points.add(0);
-7. for iterator = start + 1 to end
-        while (iterator < end) && (array[iterator] >= array[iterator - 1]) do
-            iterator++;
-        sorted_subarray_end_points.add(iterator);
-8. if sorted_subarray_end_points[sorted_subarray_end_points.size() - 1] != end then
-        sorted_subarray_end_points.add(end);
-9. number_of_sorted_subarray = (int)sorted_subarray_end_points.size() - 1;
-10. while true do
-        merge_iterator_start = 0;
-        merge_iterator_middle = merge_iterator_start + step_counter;
-        merge_iterator_end = minimim(merge_iterator_middle + step_counter, number_of_sorted_subarray);
-        if merge_iterator_middle >= number_of_sorted_subarray then
-            return
-        while merge_iterator_middle < number_of_sorted_subarray do
-            Merge(array, sorted_subarray_end_points[merge_iterator_start], sorted_subarray_end_points[merge_iterator_middle], sorted_subarray_end_points[merge_iterator_end]);
-            merge_iterator_start = merge_iterator_end;
-            merge_iterator_middle = merge_iterator_start + step_counter;
-            merge_iterator_end = minimum(merge_iterator_middle + step_counter, number_of_sorted_subarray);
-        step_counter = step_counter * 2</code></pre>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="modal-depth">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modal-depth')">X</button>
-            <div class="modal-body">
-                <h2 class="major">EXTRACTING AND RENDERING 3D STRUCTURE AND ORIENTATION OF OBJECTS FROM 2D IMAGES</h2>
-                <h3 class="major">Abstract</h3>
-                <p>This work explores extraction of spatial orientation and geometric structure of objects and landscapes from 2D images using Deep Neural Networks and Stereo Vision based approaches, to render the structure in 3D space to aid in various application in the field of Virtual and Augmented Reality. Regular 2D images are used to generate a Depth Map using Deep Neural Networks or Stereo Vision, which can then be used to model the 3D structure of the objects in the image.</p>
-                <h3 class="major">Introduction</h3>
-                <p>Representation of the world in a three dimensional form virtually has various advantages in the field of medical modelling, terrain mapping and building realistic maps for multi player video games. It could be used to aid doctors in creating simulations of surgical procedures. Three dimensional terrain mapping could potentially help defense personnel understand the terrain in treacherous regions. Furthermore, 3d modelling could aid video game enthusiasts in providing realistic gaming experiance.</p>
-                <p>This work aims to obtain 3D Point Clouds of real-world objects, using only 2D images of the object, without the aid of any special sensors such as the Kinect sensor. This can be done by generating multiple Depth Maps of the various images taken of the object from various viewpoints and using those Depth Maps to generate a 3D Point Cloud of the object.</p>
-                <p>Existing techniques to generate/render 3D structure and orientation of objects from 2D images use a combination of interpolation algorithms and Deep Learning Models based on Convolution Neural Networks. Convolution Neural Networks deal with scalars and focus on the features in the images as opposed to orientations. This leads to issues such as inaccurate depth and noise and holes in the output when generating the Depth Maps of the Input Images as can be observed.</p>
-                <h3 class="major">GitHub Links</h3>
-                <p><h4><a href="https://github.com/kaybee1928/2Dto3D">GitHub - https://github.com/kaybee1928/2Dto3D</a></h4>
-                <h4>Forked from our main project repository:</h4>
-                <h4><a href="https://github.com/Its-a-me-Ashwin/2Dto3D">GitHub - https://github.com/Its-a-me-Ashwin/2Dto3D</a></h4></p>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="modal-compiler">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modal-compiler')">X</button>
-            <div class="modal-body">
-                <h2 class="major">Compiler Design</h2>
-                <p>Simple working compiler for C type language. Supports use of while loop and conditional statement and optimises the code by removing unwanted lines and variables.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="modal-mscloud">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modal-mscloud')">X</button>
-            <div class="modal-body">
-                <h2 class="major">Database orchestrator with master-slave architecture</h2>
-                <p>Implemented highly available and fault tolerant Database as a Service using master-slave architecture</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="modal-peuler">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modal-peuler')">X</button>
-            <div class="modal-body">
-                <h2 class="major">Project Euler</h2>
-                <p>Mathemaical problems solved with coding. This involves using many algorithms and mathematical formlae to overcome the high complexity of the problem.</p>
-            </div>
-        </div>
-    </div>
 
 
 
 
 <script>
+    // --- NATIVE MODAL LOGIC ---
     var isModalOpen = false;
 
     function openModal(id) {
@@ -835,8 +398,6 @@ Iterator : Random Access Iterator</code></pre>
             setTimeout(function() {
                 m.style.setProperty('opacity', '1', 'important');
             }, 10);
-            
-            // Apply lock class
             document.body.classList.add('modal-open');
             isModalOpen = true;
         }
@@ -852,32 +413,14 @@ Iterator : Random Access Iterator</code></pre>
             m.style.setProperty('opacity', '0', 'important');
             setTimeout(function() {
                 m.style.setProperty('display', 'none', 'important');
-                
-                // Remove lock class
                 document.body.classList.remove('modal-open');
                 isModalOpen = false;
             }, 300);
         }
     }
 
+    // Attach strict click listeners to overlays to stop bubbling
     document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.project-card').forEach(function(card) {
-            card.onclick = function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                openModal(this.getAttribute('data-project'));
-            };
-        });
-        
-        document.querySelectorAll('.modal-close').forEach(function(btn) {
-            btn.onclick = function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                var overlayId = this.closest('.modal-overlay').id;
-                closeModal(overlayId, e);
-            };
-        });
-        
         document.querySelectorAll('.modal-overlay').forEach(function(m) {
             m.onclick = function(e) {
                 if(e.target === this) {
@@ -887,40 +430,28 @@ Iterator : Random Access Iterator</code></pre>
                 }
             };
             
-            // Stop scroll events from bubbling up to the locked body
-            m.addEventListener('wheel', function(e) {
-                e.stopPropagation();
-            }, {passive: false});
-            
-            m.addEventListener('touchmove', function(e) {
-                e.stopPropagation();
-            }, {passive: false});
+            // Stop scroll events from bubbling
+            m.addEventListener('wheel', function(e) { e.stopPropagation(); }, {passive: false});
+            m.addEventListener('touchmove', function(e) { e.stopPropagation(); }, {passive: false});
         });
         
-        // Stop clicks inside modal content from bubbling to the overlay
         document.querySelectorAll('.modal-content').forEach(function(content) {
-            content.onclick = function(e) {
-                e.stopPropagation();
-            };
+            content.onclick = function(e) { e.stopPropagation(); };
         });
     });
 </script>
 
-
-
-
-
 <script>
-    // PAGINATION LOGIC (Smooth and Math-Based)
+    // --- SMOOTH FOLDING PAGINATION LOGIC ---
     document.addEventListener('DOMContentLoaded', function() {
         var grid = document.getElementById('portfolio-grid');
         var cards = Array.from(grid.querySelectorAll('.project-card'));
         var btnMore = document.getElementById('btn-show-more');
         var btnLess = document.getElementById('btn-show-less');
         
-        var visibleCount = 4; // Start with 4
-        var step = 4; // Chunk size
-        var minVisible = 4; // Never hide the first 4
+        var visibleCount = 4;
+        var step = 4;
+        var minVisible = 4;
         var totalCards = cards.length;
         
         function updateVisibility() {
@@ -928,35 +459,22 @@ Iterator : Random Access Iterator</code></pre>
                 if (index < visibleCount) {
                     card.classList.remove('hide-card');
                     card.classList.add('show-card');
-                    
-                    // We need to manage display explicitly after the transition to free up space
                     setTimeout(function() {
                         if (card.classList.contains('show-card')) {
                             card.style.display = 'flex';
                         }
                     }, 50); 
-                    
                 } else {
                     card.classList.remove('show-card');
                     card.classList.add('hide-card');
-                    
-                    // Wait for CSS fade/scale out before collapsing the space
-                    setTimeout(function() {
-                        if (card.classList.contains('hide-card')) {
-                            card.style.display = 'none';
-                        }
-                    }, 400); 
                 }
             });
             
-            // Toggle 'Show More' button
             if (visibleCount >= totalCards) {
                 btnMore.style.display = 'none';
             } else {
                 btnMore.style.display = 'inline-block';
             }
-            
-            // Toggle 'Show Less' button
             if (visibleCount <= minVisible) {
                 btnLess.style.display = 'none';
             } else {
@@ -969,22 +487,18 @@ Iterator : Random Access Iterator</code></pre>
                 visibleCount += step;
                 if (visibleCount > totalCards) visibleCount = totalCards;
                 updateVisibility();
-                
-                // Optional: Scroll down slightly so they know new things appeared
                 setTimeout(function() {
-                    window.scrollBy({top: 400, left: 0, behavior: 'smooth'});
+                    window.scrollBy({top: 600, left: 0, behavior: 'smooth'});
                 }, 100);
             });
             
             btnLess.addEventListener('click', function() {
                 var prevVisible = visibleCount;
-                
                 if (visibleCount % step !== 0) {
                     visibleCount = visibleCount - (visibleCount % step);
                 } else {
                     visibleCount -= step;
                 }
-                
                 if (visibleCount < minVisible) visibleCount = minVisible;
                 
                 var cardsToHide = [];
@@ -994,41 +508,32 @@ Iterator : Random Access Iterator</code></pre>
                     }
                 });
                 
-                // Step 1: Fold up immediately
+                // Fold up
                 cardsToHide.forEach(function(card) {
                     card.classList.remove('show-card');
                     card.classList.add('hide-card');
                 });
                 
-                // Step 2: Smooth scroll up
-                window.scrollBy({top: -500, left: 0, behavior: 'smooth'});
+                window.scrollBy({top: -800, left: 0, behavior: 'smooth'});
                 
-                // Step 3: Wait for 3D fold to finish (600ms) before snapping display:none
                 setTimeout(function() {
                     cardsToHide.forEach(function(card) {
                         card.style.display = 'none';
                     });
                     
-                    if (visibleCount >= totalCards) {
-                        btnMore.style.display = 'none';
-                    } else {
-                        btnMore.style.display = 'inline-block';
-                    }
-                    if (visibleCount <= minVisible) {
-                        btnLess.style.display = 'none';
-                    } else {
-                        btnLess.style.display = 'inline-block';
-                    }
+                    if (visibleCount >= totalCards) btnMore.style.display = 'none';
+                    else btnMore.style.display = 'inline-block';
+                    
+                    if (visibleCount <= minVisible) btnLess.style.display = 'none';
+                    else btnLess.style.display = 'inline-block';
                 }, 600); 
             });
             
-            // Initialize immediately
-            cards.forEach(c => c.style.display = 'none'); // Pre-hide all
+            cards.forEach(c => c.style.display = 'none'); // Initialize
             updateVisibility();
         }
     });
 </script>
-
 
 </body>
 </html>
