@@ -421,6 +421,14 @@ body.modal-open {
 
     // Attach strict click listeners to overlays to stop bubbling
     document.addEventListener('DOMContentLoaded', function() {
+        // FALLBACK: Manually attach click listeners to all cards if the HTML onclick fails
+        document.querySelectorAll('.project-card').forEach(function(card) {
+            card.addEventListener('click', function(e) {
+                e.preventDefault();
+                openModal(this.getAttribute('data-project'));
+            });
+        });
+
         document.querySelectorAll('.modal-overlay').forEach(function(m) {
             m.onclick = function(e) {
                 if(e.target === this) {
