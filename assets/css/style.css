@@ -55,24 +55,27 @@ body {
 nav {
   display: flex;
   justify-content: center;
-  padding: 1.5rem;
-  background: rgba(253, 246, 227, 0.9);
+  padding: 1rem;
+  background: rgba(253, 246, 227, 0.95);
   backdrop-filter: blur(10px);
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 100;
   box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+  gap: 10px; /* Consistent spacing when wrapping */
 }
 
 nav a {
-  color: var(--text-bold);
+color: var(--text-bold);
   text-decoration: none;
-  margin: 0 1.5rem;
+  margin: 0 0.8rem; /* Slightly reduced margin for better fit */
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   position: relative;
   transition: color 0.3s ease;
+  white-space: nowrap; /* Keep words together */
 }
 
 nav a:hover { color: var(--accent); }
@@ -90,7 +93,7 @@ nav a::after {
 nav a:hover::after, nav a.active::after { width: 100%; }
 
 .container {
-  max-width: 1100px;
+  max-width: 1300px; /* Increased from 1100px */
   margin: 120px auto 50px;
   padding: 0 2rem;
   flex: 1;
@@ -193,13 +196,13 @@ h1 span {
 
 /* Projects Grid & Cards */
 .projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Increased card min-width */
   gap: 2.5rem;
 }
 
 .project-card {
-  background: var(--bg-alt);
+background: var(--bg-alt);
   border-radius: 12px;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -208,6 +211,7 @@ h1 span {
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  min-height: 480px; /* Make the whole card generally taller */
 }
 
 .project-card:hover {
@@ -217,7 +221,7 @@ h1 span {
 }
 
 .project-img {
-    height: 180px;
+height: 250px; /* Increased from 180px */
     width: 100%;
     background-color: var(--base2);
     display: flex;
