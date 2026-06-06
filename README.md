@@ -46,4 +46,4 @@ Custom **Solarized Light** color scheme built from scratch. No framework depende
 ## Links
 
 - LinkedIn: https://www.linkedin.com/in/kashribha/
-- GitHub: https://github.com/kaybee1928
+- GitHub: https://github.com/kashribha
