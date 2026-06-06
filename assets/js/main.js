@@ -12,10 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
         entry.target.classList.add('visible');
         observer.unobserve(entry.target);
       }
-      }, observerOptions);
+    });
+  }, observerOptions);
 
   document.querySelectorAll('.fade-up').forEach(element => {
     observer.observe(element);
+  });
   
   // Highlight active nav based on pathname
   const path = window.location.pathname;
@@ -26,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
           link.classList.remove('active');
       }
+  });
   
   // Modal Logic (only if modal exists on page)
   const modalOverlay = document.getElementById('project-modal');
@@ -171,7 +174,9 @@ document.addEventListener('DOMContentLoaded', () => {
       modalClose.addEventListener('click', closeModal);
       modalOverlay.addEventListener('click', (e) => {
         if(e.target === modalOverlay) closeModal();
-        }
+      });
+    });
+  }
 
 
   
@@ -244,13 +249,60 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
+  
+  // --- Grid Trail Animation (Fixed) ---
+  const gridContainer = document.getElementById('grid-trail');
+  if (gridContainer) {
+      let cols = 0, rows = 0;
+      
+      const createGrid = () => {
+          gridContainer.innerHTML = '';
+          const size = 50; // Cell size
+          cols = Math.floor(window.innerWidth / size) + 1;
+          rows = Math.floor(window.innerHeight / size) + 1;
+          
+          gridContainer.style.setProperty('--columns', cols);
+          gridContainer.style.setProperty('--rows', rows);
+          
+          for(let i=0; i<cols*rows; i++) {
+              const cell = document.createElement('div');
+              cell.className = 'grid-cell';
+              gridContainer.appendChild(cell);
+          }
+      };
+      createGrid();
+      window.addEventListener('resize', createGrid);
+
+      // Add trail effect on mousemove matching grid-trail.webflow.io
+      document.addEventListener('mousemove', (e) => {
+          if (!gridContainer) return;
+          const size = 50;
+          const col = Math.floor(e.clientX / size);
+          const row = Math.floor(e.clientY / size);
+          const index = row * cols + col;
+          
+          const cells = gridContainer.children;
+          if (cells[index]) {
+              const cell = cells[index];
+              cell.classList.add('active');
+              setTimeout(() => {
+                  cell.classList.remove('active');
+              }, 400); // 400ms fade duration
+          }
+      });
+  }
+
+  
+      });
+  }
+
   // Grid Trail Logic
   const gridContainer = document.getElementById('grid-trail');
   if (gridContainer) {
       let cols = 0, rows = 0;
       const createGrid = () => {
           gridContainer.innerHTML = '';
-          const size = 60; // 60px cell size
+          const size = 50; 
           cols = Math.ceil(window.innerWidth / size);
           rows = Math.ceil(window.innerHeight / size);
           gridContainer.style.setProperty('--columns', cols);
@@ -259,18 +311,29 @@ document.addEventListener('DOMContentLoaded', () => {
           for(let i=0; i<cols*rows; i++) {
               const cell = document.createElement('div');
               cell.className = 'grid-cell';
-              cell.addEventListener('mouseenter', () => {
-                  cell.classList.add('active');
-                  setTimeout(() => cell.classList.remove('active'), 150);
-              });
               gridContainer.appendChild(cell);
           }
       };
       createGrid();
       window.addEventListener('resize', createGrid);
+      
+      document.addEventListener('mousemove', (e) => {
+          if (!gridContainer) return;
+          const size = 50;
+          const col = Math.floor(e.clientX / size);
+          const row = Math.floor(e.clientY / size);
+          const index = row * cols + col;
+          
+          const cells = gridContainer.children;
+          if (cells[index]) {
+              const cell = cells[index];
+              cell.classList.add('active');
+              setTimeout(() => cell.classList.remove('active'), 400); 
+          }
+      });
   }
 
-  // Floating Shapes Parallax
+  // Floating Pizza-Burger Inspired Parallax
   const shapes = document.querySelectorAll('.floating-shape');
   if (shapes.length > 0) {
       document.addEventListener('mousemove', (e) => {
