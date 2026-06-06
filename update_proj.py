@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+with open('/home/kashribha/Documents/job_apply/kashribha.github.io/projects.html', 'w') as f:
+    f.write('''<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -91,4 +92,4 @@
         <p>Built by K Shrinidhi Bhagavath | Solarized Light Theme</p>
     </footer>
 </body>
-</html>
+</html>''')

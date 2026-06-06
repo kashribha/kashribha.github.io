@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {
+with open('/home/kashribha/Documents/job_apply/kashribha.github.io/assets/js/main.js', 'w') as f:
+    f.write('''document.addEventListener('DOMContentLoaded', () => {
   // Intersection Observer for scroll animations
   const observerOptions = {
     root: null,
@@ -127,4 +128,4 @@ document.addEventListener('DOMContentLoaded', () => {
         if(e.target === modalOverlay) closeModal();
       });
   }
-});
+});''')
