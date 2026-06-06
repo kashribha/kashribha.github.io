@@ -168,5 +168,84 @@
         </div>
         <p>Built by K Shrinidhi Bhagavath | Solarized Light Theme</p>
     </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var pData = {
+            'cert-rotation': {
+                desc: '<h3 class="major" style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.8rem;">Emergency Certificate Rotation (CPS)</h3><p>Designed and built an automated certificate rotation pipeline for Akamai\'s Certificate Provisioning System (CPS). When a Certificate Authority marks a specific batch of certificates as vulnerable, this system kicks in to rotate them securely without manual intervention, drastically reducing toil and improving security posture.</p>'
+            },
+            'delivery-automation': {
+                desc: '<h3 class="major" style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.8rem;">Software Delivery Automation</h3><p>Architected a full-stack application for end-to-end deployment, testing, and monitoring across multiple internal Akamai services.</p><p>This automation significantly streamlines the delivery pipeline by removing manual bottlenecks and unifying disparate workflows.</p><ul style="margin-left: 20px; margin-top: 10px;"><li>Reduced weekly manual toil by <strong>95%</strong> (from 3 hours to 9 minutes).</li><li>Unified deployment workflows across multiple internal services.</li><li>Built robust end-to-end testing and monitoring hooks.</li></ul>'
+            },
+            'mcp-oauth': {
+                desc: '<h3 class="major" style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.8rem;">MCP Integrations for Akamai Internal Services & Edgegrid</h3><p>Developed multiple Model Context Protocol (MCP) servers to bridge Akamai\'s infrastructure with AI tooling:</p><ol style="line-height: 2.5em; margin-left: 20px; margin-top: 10px;"><li><strong>OAuth2 & Telemetry:</strong> Built an MCP with robust OAuth2 handling and user-level monitoring tailored for internal applications and services used by Akamai employees.</li><li><strong>Edgegrid MCP:</strong> Engineered an MCP specifically targeting Akamai Products that leverage Edgegrid APIs, exposing capabilities to secure AI environments.</li></ol>'
+            },
+            'log-analysis': {
+                desc: '<h3 class="major" style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.8rem;">LOW LATENCY LOG ANALYSIS AND VISUALIZATION</h3><ol style="line-height: 2.5em; margin-left: 20px; margin-top: 10px;"><li>Developed efficient way to analyse millions of rows and dynamically update top 5% CP Code for all the service provided by Akamai.</li><li>Created job for inserting hourly and daily aggregation of all metrics to the database optimally.</li><li>Working on automated analysis and reporting of probable cause for any anomaly seen in the service.</li><li>Currently using Clickhouse as intermediatary databse and Apache Superset for visualization</li></ol><p style="margin-top: 20px; font-weight: bold;">On Going Project ...</p>'
+            },
+            'automation-library': {
+                desc: '<h3 class="major" style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.8rem;">Python Automation Library</h3><ul style="line-height: 2em; margin-left: 20px; margin-top: 10px;"><li>Developed python interface for Grafana and databases like Clickhouse and modified Apache Cassandra. Added functionality to provide baselines for the metrics extracted from monitoring tools.</li><li>Managed application and created visual representation for metrics provided from the application.</li><li>Working on automated data analysis and visualization of low latency logs from Akamai network</li></ul>'
+            },
+            'trie-index': {
+                desc: '<h3 class="major" style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.8rem;">Trie-Based Inverted Index Engine</h3><p>Custom C++ search engine using Trie data structures optimizing for memory locality and fast wildcard queries.</p>'
+            },
+            'ltree': {
+                desc: '<h3 class="major" style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.8rem;">LTree: Hybrid Fast Data Structure</h3><p>Novel C++ hybrid data structure bridging Arrays and Linked Lists with O(log n) access time.</p>'
+            },
+            'rnn-captioning': {
+                desc: '<h3 class="major" style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.8rem;">Internship at CDSAML, PES University</h3><p>CDSAML (Center for Data Sciences and Applied Machine Learning)</p><ul style="line-height: 2em; margin-left: 20px; margin-top: 10px;"><li>Implemented a model with hierarchical recurrent neural network to generate descriptive paragraph on an image. The model has a sentence RNN receives the image features, decides how many sentences to generate in the resulting paragraph, and produces an input topic vector for each sentence. This topic vector is then used by word RNN to generate the words of a single sentence. Predicted sentence had 13.6 METEOR score and BLEU-1 of 34.4%.</li></ul>'
+            },
+            'sort': {
+                desc: '<h3 class="major" style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.8rem;">Fast Merge Sort (ARootSort)</h3><p>ARoot Sort is a highly optimised merge sort which performes two different kinds of merge sort based on degree of sortedness of input after subarray reversing. It is a stable sort and outperforms std::sort that implements introsort by a small margin</p><p style="margin-top: 20px;"><h3 class="major" style="font-size: 1.2rem;"><a href="https://github.com/kaybee1928/ARoot-Sort" style="color: var(--primary-color); text-decoration: none;">GitHub - https://github.com/kaybee1928/ARoot-Sort</a></h3></p>'
+            },
+            'depth': {
+                desc: '<h3 class="major" style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.8rem;">3D Structure and Orientation from 2D Images</h3><p>Constructing 3D structures from multiple 2D images using deep learning and image processing.</p><ul style="line-height: 2em; margin-left: 20px; margin-top: 10px;"><li>Implemented feature extraction techniques using Convolutional Neural Networks.</li><li>Built algorithms to calculate depth mapping and render objects in a 3D coordinate space.</li></ul>'
+            },
+            'compiler': {
+                desc: '<h3 class="major" style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.8rem;">Compiler Design</h3><p>Built a simple working compiler for a C-type language.</p><ul style="line-height: 2em; margin-left: 20px; margin-top: 10px;"><li>Supports use of while loops and conditional statements.</li><li>Optimizes the intermediate code by removing unwanted lines and unused variables automatically.</li></ul>'
+            },
+            'mscloud': {
+                desc: '<h3 class="major" style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.8rem;">Database Orchestrator with Master-Slave Architecture</h3><p>Implemented a highly available and fault-tolerant Database as a Service platform.</p><ul style="line-height: 2em; margin-left: 20px; margin-top: 10px;"><li>Designed using a Master-Slave architecture for read/write scaling.</li><li>Automated failover protocols to prevent data loss during node failures.</li></ul>'
+            },
+            'peuler': {
+                desc: '<h3 class="major" style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.8rem;">Project Euler</h3><p>Solving complex mathematical problems with code to overcome high computational complexities.</p><ul style="line-height: 2em; margin-left: 20px; margin-top: 10px;"><li>Utilized advanced data structures and dynamic programming.</li><li>Improved complexity analysis skills through iterative algorithm optimization.</li></ul>'
+            }
+    };
+    
+    var m = document.getElementById('project-modal');
+    var b = m.querySelector('.modal-body');
+    var c = m.querySelector('.modal-close');
+    
+    document.querySelectorAll('.project-card').forEach(function(card) {
+        var clone = card.cloneNode(true);
+        card.parentNode.replaceChild(clone, card);
+        clone.style.cursor = 'pointer';
+        
+        clone.addEventListener('click', function(e) {
+            e.preventDefault();
+            var id = this.getAttribute('data-project');
+            if(pData[id]) {
+                b.innerHTML = '<div style="line-height: 1.8; color: var(--text-main); font-size: 1.1rem; padding: 10px;">' + pData[id].desc + '</div>';
+                m.style.setProperty('display', 'flex', 'important');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+    
+    c.addEventListener('click', function() {
+        m.style.setProperty('display', 'none', 'important');
+        document.body.style.overflow = '';
+    });
+    
+    m.addEventListener('click', function(e) {
+        if(e.target === m) {
+            m.style.setProperty('display', 'none', 'important');
+            document.body.style.overflow = '';
+        }
+    });
+});
+</script>
+
 </body>
 </html>
