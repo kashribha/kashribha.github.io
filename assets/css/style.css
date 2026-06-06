@@ -197,9 +197,15 @@ h1 span {
 
 /* Projects Grid & Cards */
 .projects-grid {
-display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Increased card min-width significantly */
-  gap: 3rem; /* Increase space between cards */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Strictly 2 columns maximum */
+  gap: 4rem; /* Increased gap spacing */
+}
+
+@media (max-width: 950px) {
+  .projects-grid {
+    grid-template-columns: 1fr; /* 1 column on tablets and mobile */
+  }
 }
 
 .project-card {
