@@ -10,6 +10,15 @@
 
 <style>
 
+
+/* Nuke any potential scrolling on the body globally while modal is open */
+body.modal-open {
+    overflow: hidden !important;
+    position: fixed !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
 .modal-overlay {
     position: fixed !important;
     top: 0 !important;
@@ -18,38 +27,37 @@
     height: 100vh !important;
     background: rgba(0, 43, 54, 0.85) !important;
     backdrop-filter: blur(8px) !important;
-    z-index: 2147483647 !important;
+    z-index: 2147483647 !important; /* Maximum possible z-index in browsers */
     display: none;
     align-items: center !important;
     justify-content: center !important;
     opacity: 0;
     transition: opacity 0.3s ease !important;
+    overflow-y: auto !important;
+    padding: 40px 0 !important;
+    pointer-events: auto !important;
 }
 
 .modal-overlay[style*="display: flex"] {
     opacity: 1 !important;
 }
 
-/* Modern, polished Modal styling */
-
-
-
-
 .modal-content {
-    background: var(--bg-primary, #fdf6e3) !important; /* Solarized Light base */
+    background: var(--bg-primary, #fdf6e3) !important;
     width: 90% !important;
     max-width: 850px !important;
-    max-height: 85vh !important;
+    max-height: 80vh !important;
     overflow-y: auto !important;
     border-radius: 16px !important;
     padding: 40px 50px !important;
     position: relative !important;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
-    z-index: 9999999 !important;
+    z-index: 2147483647 !important;
     border: 1px solid rgba(147, 161, 161, 0.2) !important;
-    transform: translateY(20px);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    pointer-events: auto !important;
+    margin: auto !important; /* Ensure it stays centered when scrolling */
 }
+
 
 .modal-overlay[style*="display: flex"] .modal-content {
     transform: translateY(0) !important;
@@ -809,49 +817,52 @@ Iterator : Random Access Iterator</code></pre>
 
 
 
+
 <script>
-    // Global variable to track if ANY modal is currently open
     var isModalOpen = false;
 
     function openModal(id) {
-        if (isModalOpen) return; // Prevent opening multiple at once
+        if (isModalOpen) return;
         var m = document.getElementById('modal-' + id);
         if (m) {
             m.style.setProperty('display', 'flex', 'important');
             setTimeout(function() {
                 m.style.setProperty('opacity', '1', 'important');
             }, 10);
-            document.body.style.overflow = 'hidden'; // Stop background scrolling
+            
+            // Apply lock class
+            document.body.classList.add('modal-open');
             isModalOpen = true;
         }
     }
     
     function closeModal(modalId, event) {
         if (event) {
-            event.stopPropagation(); // Stop click from hitting elements underneath
+            event.preventDefault();
+            event.stopPropagation();
         }
         var m = document.getElementById(modalId);
         if (m) {
             m.style.setProperty('opacity', '0', 'important');
             setTimeout(function() {
                 m.style.setProperty('display', 'none', 'important');
-                document.body.style.overflow = ''; // Restore background scrolling
+                
+                // Remove lock class
+                document.body.classList.remove('modal-open');
                 isModalOpen = false;
-            }, 300); // Wait for fade out animation
+            }, 300);
         }
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        // Fix project cards to pass event correctly
         document.querySelectorAll('.project-card').forEach(function(card) {
             card.onclick = function(e) {
                 e.preventDefault();
-                e.stopPropagation(); // Stop click from bubbling
+                e.stopPropagation();
                 openModal(this.getAttribute('data-project'));
             };
         });
         
-        // Fix close buttons to pass event correctly
         document.querySelectorAll('.modal-close').forEach(function(btn) {
             btn.onclick = function(e) {
                 e.preventDefault();
@@ -861,19 +872,34 @@ Iterator : Random Access Iterator</code></pre>
             };
         });
         
-        // Background click to close
         document.querySelectorAll('.modal-overlay').forEach(function(m) {
             m.onclick = function(e) {
-                // Only close if we clicked the dark overlay itself, NOT the content inside it
                 if(e.target === this) {
                     e.preventDefault();
                     e.stopPropagation();
                     closeModal(this.id, e);
                 }
             };
+            
+            // Stop scroll events from bubbling up to the locked body
+            m.addEventListener('wheel', function(e) {
+                e.stopPropagation();
+            }, {passive: false});
+            
+            m.addEventListener('touchmove', function(e) {
+                e.stopPropagation();
+            }, {passive: false});
+        });
+        
+        // Stop clicks inside modal content from bubbling to the overlay
+        document.querySelectorAll('.modal-content').forEach(function(content) {
+            content.onclick = function(e) {
+                e.stopPropagation();
+            };
         });
     });
 </script>
+
 
 
 </body>
