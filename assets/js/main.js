@@ -178,4 +178,53 @@ document.addEventListener('DOMContentLoaded', () => {
         if(e.target === modalOverlay) closeModal();
       });
   }
+
+  // Interactive Face Logic
+  const face = document.getElementById('interactive-face');
+  const pupils = document.querySelectorAll('.pupil');
+  const mouth = document.getElementById('face-mouth');
+
+  if (face && pupils.length > 0 && mouth) {
+      document.addEventListener('mousemove', (e) => {
+          const rect = face.getBoundingClientRect();
+          const faceCenterX = rect.left + rect.width / 2;
+          const faceCenterY = rect.top + rect.height / 2;
+
+          const deltaX = e.clientX - faceCenterX;
+          const deltaY = e.clientY - faceCenterY;
+          const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+          // Move pupils
+          const angle = Math.atan2(deltaY, deltaX);
+          const maxMove = 10;
+          const moveX = Math.cos(angle) * Math.min(distance / 12, maxMove);
+          const moveY = Math.sin(angle) * Math.min(distance / 12, maxMove);
+
+          pupils.forEach(pupil => {
+              pupil.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
+          });
+
+          // Emote based on pointer
+          if (distance < 70) {
+              mouth.className = 'mouth surprised';
+          } else if (deltaY < -150) {
+              mouth.className = 'mouth';
+              mouth.style.height = '10px';
+          } else if (deltaX > 250 || deltaX < -250) {
+              mouth.className = 'mouth';
+              mouth.style.height = '15px';
+              mouth.style.width = '40px';
+          } else {
+              mouth.className = 'mouth';
+              mouth.style.height = '20px';
+              mouth.style.width = '50px';
+          }
+      });
+      
+      face.addEventListener('click', () => {
+          mouth.className = 'mouth smile';
+          setTimeout(() => { mouth.className = 'mouth'; }, 1500);
+      });
+  }
+
 });
