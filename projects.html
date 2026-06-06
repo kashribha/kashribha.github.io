@@ -714,7 +714,7 @@ Iterator : Random Access Iterator</code></pre>
 </script>
 
 <script>
-    // --- SMOOTH FOLDING PAGINATION LOGIC ---
+    // --- SMOOTH FOLDING PAGINATION LOGIC (NO DISPLAY FLIPPING) ---
     document.addEventListener('DOMContentLoaded', function() {
         var grid = document.getElementById('portfolio-grid');
         var cards = Array.from(grid.querySelectorAll('.project-card'));
@@ -726,32 +726,23 @@ Iterator : Random Access Iterator</code></pre>
         var minVisible = 4;
         var totalCards = cards.length;
         
+        function updateButtons() {
+            if (visibleCount >= totalCards) btnMore.style.display = 'none';
+            else btnMore.style.display = 'inline-block';
+            
+            if (visibleCount <= minVisible) btnLess.style.display = 'none';
+            else btnLess.style.display = 'inline-block';
+        }
+        
         function updateVisibility() {
             cards.forEach(function(card, index) {
                 if (index < visibleCount) {
-                    if (card.style.display === 'none') {
-                        card.style.display = 'flex';
-                        // Force browser reflow to prevent animation snapping
-                        void card.offsetWidth;
-                    }
                     card.classList.remove('hide-card');
-                    card.classList.add('show-card');
                 } else {
-                    card.classList.remove('show-card');
                     card.classList.add('hide-card');
                 }
             });
-            
-            if (visibleCount >= totalCards) {
-                btnMore.style.display = 'none';
-            } else {
-                btnMore.style.display = 'inline-block';
-            }
-            if (visibleCount <= minVisible) {
-                btnLess.style.display = 'none';
-            } else {
-                btnLess.style.display = 'inline-block';
-            }
+            updateButtons();
         }
         
         if (btnMore && btnLess) {
@@ -759,6 +750,7 @@ Iterator : Random Access Iterator</code></pre>
                 visibleCount += step;
                 if (visibleCount > totalCards) visibleCount = totalCards;
                 updateVisibility();
+                
                 setTimeout(function() {
                     window.scrollBy({top: 600, left: 0, behavior: 'smooth'});
                 }, 100);
@@ -773,35 +765,18 @@ Iterator : Random Access Iterator</code></pre>
                 }
                 if (visibleCount < minVisible) visibleCount = minVisible;
                 
-                var cardsToHide = [];
+                // Animate folding up
                 cards.forEach(function(card, index) {
                     if (index >= visibleCount && index < prevVisible) {
-                        cardsToHide.push(card);
+                        card.classList.add('hide-card');
                     }
                 });
                 
-                // Fold up
-                cardsToHide.forEach(function(card) {
-                    card.classList.remove('show-card');
-                    card.classList.add('hide-card');
-                });
-                
                 window.scrollBy({top: -800, left: 0, behavior: 'smooth'});
-                
-                setTimeout(function() {
-                    cardsToHide.forEach(function(card) {
-                        card.style.display = 'none';
-                    });
-                    
-                    if (visibleCount >= totalCards) btnMore.style.display = 'none';
-                    else btnMore.style.display = 'inline-block';
-                    
-                    if (visibleCount <= minVisible) btnLess.style.display = 'none';
-                    else btnLess.style.display = 'inline-block';
-                }, 600); 
+                updateButtons();
             });
             
-            cards.forEach(c => c.style.display = 'none'); // Initialize
+            // Initialize
             updateVisibility();
         }
     });
