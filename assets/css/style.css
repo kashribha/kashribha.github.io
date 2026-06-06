@@ -93,9 +93,10 @@ nav a::after {
 nav a:hover::after, nav a.active::after { width: 100%; }
 
 .container {
-  max-width: 1300px; /* Increased from 1100px */
-  margin: 120px auto 50px;
-  padding: 0 2rem;
+  max-width: 1400px; /* Even wider */
+  width: 95%; /* Ensure it takes up most of the screen */
+  margin: 120px auto 50px; /* Keep auto for centering, but widen the boundaries */
+  padding: 0 1rem;
   flex: 1;
 }
 
@@ -197,8 +198,8 @@ h1 span {
 /* Projects Grid & Cards */
 .projects-grid {
 display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Increased card min-width */
-  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Increased card min-width significantly */
+  gap: 3rem; /* Increase space between cards */
 }
 
 .project-card {
@@ -211,7 +212,7 @@ background: var(--bg-alt);
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  min-height: 480px; /* Make the whole card generally taller */
+  min-height: 520px; /* Make the whole card larger */
 }
 
 .project-card:hover {
@@ -221,7 +222,7 @@ background: var(--bg-alt);
 }
 
 .project-img {
-height: 250px; /* Increased from 180px */
+height: 280px; /* Increased image height even more */
     width: 100%;
     background-color: var(--base2);
     display: flex;
