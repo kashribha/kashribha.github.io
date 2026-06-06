@@ -3,104 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K Shrinidhi Bhagavath | Senior Software Engineer</title>
+    <title>K Shrinidhi Bhagavath | Software Engineer</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/js/main.js" defer></script>
 </head>
 <body>
     <div class="bg-animation"></div>
-    
     <nav>
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Key Projects</a>
-        <a href="#legacy">Legacy Projects</a>
+        <a href="index.html">Intro</a>
+        <a href="experience.html">Experience</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
     </nav>
-
     <div class="container">
-        <header class="hero">
-            <h1>Hi, I am <span>Shrinidhi Bhagavath</span>.</h1>
-            <p>I am a Senior Software Engineer specializing in low-level systems, distributed platforms, and optimization.</p>
-            <a href="#projects" class="btn">View My Work</a>
-        </header>
 
-        <section id="about" class="fade-up">
-            <h2 class="section-title">About Me</h2>
-            <div style="font-size: 1.1rem; max-width: 800px;">
-                <p style="margin-bottom: 1rem;">I have over 5 years of experience building and optimizing scalable systems at Akamai Technologies. I hold a B.Tech in Computer Science and Engineering with a specialization in Algorithm and Computing Models from PES University, Bangalore.</p>
-                <p>When I am not architecting distributed platforms or tweaking low-level code, you can find me reading manga, beatboxing, or following Formula One racing.</p>
-            </div>
+        <section id="intro" class="page-section fade-up">
+            <header class="hero">
+                <div class="profile-img-container">
+                    <img src="images/usr.png" alt="K Shrinidhi Bhagavath">
+                </div>
+                <h1>Hi, I am <span>K Shrinidhi Bhagavath</span>.</h1>
+                
+                <div style="font-size: 1.15rem; max-width: 800px; text-align: left; margin-top: 1rem; color: var(--text-main);">
+                    <p style="margin-bottom: 1rem;">My target or dream work is specializing in low-level systems, distributed platforms, and optimization. Currently, my work is partially on distributed systems and platforms, but mainly focuses on automation, MCP integrations, tools, and infrastructure.</p>
+                    <p>Outside of work, what I like to do is to read books, play PC games from time to time, exercise and reading manga, playing badminton with friends and cousins.</p>
+                </div>
+                
+                <div class="hobbies-section">
+                    <span class="hobby-badge">📚 Books & Manga</span>
+                    <span class="hobby-badge">🏸 Badminton</span>
+                    <span class="hobby-badge">🎮 PC Games</span>
+                    <span class="hobby-badge">🏋️‍♂️ Exercise</span>
+                </div>
+            </header>
         </section>
 
-        <section id="experience" class="fade-up">
-            <h2 class="section-title">Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <span class="timeline-date">July 2021 - Present</span>
-                    <div class="timeline-content">
-                        <h3>Senior Software Engineer</h3>
-                        <h4>Akamai Technologies Ltd.</h4>
-                        <p>Leading development of critical infrastructure, automated platforms, and low-latency log analysis systems for Akamai global edge network.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-date">Jan 2021 - June 2021, June 2020 - July 2020</span>
-                    <div class="timeline-content">
-                        <h3>Software Engineering Intern</h3>
-                        <h4>Akamai Technologies Ltd.</h4>
-                        <p>Developed asynchronous command-line tools for performance metrics and improved automated monitoring frameworks for network software changes.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="fade-up">
-            <h2 class="section-title">Latest Key Projects (2026)</h2>
-            <div class="projects-grid">
-                <div class="project-card featured">
-                    <span class="year">2026</span>
-                    <h3>Emergency Certificate Rotation (CPS)</h3>
-                    <p>Designed and built an automated certificate rotation pipeline for Akamai Certificate Provisioning System (CPS). When a CA marks a batch of certificates as vulnerable, this system securely automates the global rotation process, drastically reducing operational toil.</p>
-                </div>
-                <div class="project-card featured">
-                    <span class="year">2026</span>
-                    <h3>Internal OAuth2 MCP Server</h3>
-                    <p>Built a secure Model Context Protocol (MCP) integration with full OAuth2 handling and user-level telemetry tailored for internal applications and services used by Akamai employees.</p>
-                </div>
-                <div class="project-card featured">
-                    <span class="year">2026</span>
-                    <h3>Edgegrid API MCP</h3>
-                    <p>Engineered a specialized MCP for Akamai products that expose APIs using the Edgegrid authentication protocol, allowing AI agents to securely interact with Akamai infrastructure.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="legacy" class="fade-up">
-            <h2 class="section-title">Legacy Projects & Achievements</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>Low Latency Log Analysis</h3>
-                    <p>Developed an efficient way to analyze millions of rows and dynamically update top CP Codes. Interfaced with Grafana, Clickhouse, and Apache Cassandra to automate anomaly detection in the Akamai network.</p>
-                </div>
-                <div class="project-card">
-                    <h3>Hierarchical RNN Image Captioning</h3>
-                    <p>CDSAML Internship (2018): Implemented a model with a hierarchical recurrent neural network to generate descriptive paragraphs for images, achieving a BLEU-1 score of 34.4%.</p>
-                </div>
-                <div class="project-card">
-                    <h3>Academic Excellence</h3>
-                    <p>Recipient of the CNR Rao Merit Scholarship (top 20% in CS dept). GPA: 8.94/10. Qualifier in SnackDown 2019.</p>
-                </div>
-            </div>
-        </section>
     </div>
-
     <footer>
         <div class="social-links">
             <a href="https://www.linkedin.com/in/kashribha/" target="_blank">LinkedIn</a>
             <a href="https://github.com/kaybee1928" target="_blank">GitHub</a>
             <a href="mailto:shrinidhibhagavath11@gmail.com">Email</a>
         </div>
-        <p>Built by K Shrinidhi Bhagavath • Solarized Light Theme</p>
+        <p>Built by K Shrinidhi Bhagavath | Solarized Light Theme</p>
     </footer>
 </body>
 </html>

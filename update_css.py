@@ -1,3 +1,5 @@
+with open('/home/kashribha/Documents/job_apply/kashribha.github.io/assets/css/style.css', 'w') as f:
+    f.write('''/* ... existing CSS variables ... */
 :root {
   --base03:    #002b36;
   --base02:    #073642;
@@ -31,9 +33,6 @@ body {
   color: var(--text-main);
   line-height: 1.6;
   overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
 }
 
 /* Background animation */
@@ -73,6 +72,7 @@ nav a {
   font-size: 1.1rem;
   position: relative;
   transition: color 0.3s ease;
+  cursor: pointer;
 }
 
 nav a:hover { color: var(--accent); }
@@ -93,11 +93,16 @@ nav a:hover::after, nav a.active::after { width: 100%; }
   max-width: 1100px;
   margin: 120px auto 50px;
   padding: 0 2rem;
-  flex: 1;
 }
 
 .page-section {
+  display: none;
+  min-height: 80vh;
   animation: fadeIn 0.8s ease-out forwards;
+}
+
+.page-section.active {
+  display: block;
 }
 
 header.hero {
@@ -213,6 +218,10 @@ h1 span {
   transform: translateY(-10px);
   box-shadow: 0 20px 35px rgba(0,0,0,0.1);
   border-top: 4px solid var(--accent);
+}
+
+.project-card.featured {
+  border-top: 4px solid var(--blue);
 }
 
 .project-img {
@@ -341,6 +350,7 @@ h1 span {
     padding: 3rem;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    margin: 0 auto;
 }
 
 .form-group {
@@ -483,7 +493,7 @@ footer {
   text-align: center;
   padding: 3rem;
   border-top: 1px solid rgba(0,0,0,0.05);
-  margin-top: auto;
+  margin-top: 50px;
 }
 
 .social-links {
@@ -505,14 +515,4 @@ footer {
   color: var(--accent);
   transform: translateY(-3px);
 }
-
-.fade-up {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.fade-up.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+''')
