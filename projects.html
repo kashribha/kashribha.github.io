@@ -987,7 +987,6 @@ Iterator : Random Access Iterator</code></pre>
                 
                 if (visibleCount < minVisible) visibleCount = minVisible;
                 
-                // Only animate the cards that are ACTUALLY being hidden right now
                 var cardsToHide = [];
                 cards.forEach(function(card, index) {
                     if (index >= visibleCount && index < prevVisible) {
@@ -995,22 +994,21 @@ Iterator : Random Access Iterator</code></pre>
                     }
                 });
                 
-                // Step 1: Trigger the fade-out CSS animation immediately
+                // Step 1: Fold up immediately
                 cardsToHide.forEach(function(card) {
                     card.classList.remove('show-card');
                     card.classList.add('hide-card');
                 });
                 
-                // Step 2: Scroll up smoothly WHILE it's fading out
+                // Step 2: Smooth scroll up
                 window.scrollBy({top: -500, left: 0, behavior: 'smooth'});
                 
-                // Step 3: Wait until the fade-out is COMPLETELY done (500ms) before snapping display: none
+                // Step 3: Wait for 3D fold to finish (600ms) before snapping display:none
                 setTimeout(function() {
                     cardsToHide.forEach(function(card) {
                         card.style.display = 'none';
                     });
                     
-                    // Update buttons only after animation is done
                     if (visibleCount >= totalCards) {
                         btnMore.style.display = 'none';
                     } else {
@@ -1021,7 +1019,7 @@ Iterator : Random Access Iterator</code></pre>
                     } else {
                         btnLess.style.display = 'inline-block';
                     }
-                }, 500); 
+                }, 600); 
             });
             
             // Initialize immediately

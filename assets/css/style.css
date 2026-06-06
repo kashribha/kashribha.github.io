@@ -221,11 +221,7 @@ h1 span {
   min-height: 800px; /* Massively increased to accommodate the giant image */
 }
 
-.project-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 35px rgba(0,0,0,0.1);
-  border-top: 4px solid var(--accent);
-}
+
 
 .project-img {
 height: 560px; /* Doubled from 280px */
