@@ -909,8 +909,9 @@ Iterator : Random Access Iterator</code></pre>
 
 
 
+
 <script>
-    // PAGINATION LOGIC
+    // PAGINATION LOGIC (Smooth and Math-Based)
     document.addEventListener('DOMContentLoaded', function() {
         var grid = document.getElementById('portfolio-grid');
         var cards = Array.from(grid.querySelectorAll('.project-card'));
@@ -918,20 +919,38 @@ Iterator : Random Access Iterator</code></pre>
         var btnLess = document.getElementById('btn-show-less');
         
         var visibleCount = 4; // Start with 4
-        var step = 4; // Show 4 more on each click
+        var step = 4; // Chunk size
         var minVisible = 4; // Never hide the first 4
+        var totalCards = cards.length;
         
         function updateVisibility() {
             cards.forEach(function(card, index) {
                 if (index < visibleCount) {
-                    card.style.display = 'flex';
+                    card.classList.remove('hide-card');
+                    card.classList.add('show-card');
+                    
+                    // We need to manage display explicitly after the transition to free up space
+                    setTimeout(function() {
+                        if (card.classList.contains('show-card')) {
+                            card.style.display = 'flex';
+                        }
+                    }, 50); 
+                    
                 } else {
-                    card.style.display = 'none';
+                    card.classList.remove('show-card');
+                    card.classList.add('hide-card');
+                    
+                    // Wait for CSS fade/scale out before collapsing the space
+                    setTimeout(function() {
+                        if (card.classList.contains('hide-card')) {
+                            card.style.display = 'none';
+                        }
+                    }, 400); 
                 }
             });
             
             // Toggle 'Show More' button
-            if (visibleCount >= cards.length) {
+            if (visibleCount >= totalCards) {
                 btnMore.style.display = 'none';
             } else {
                 btnMore.style.display = 'inline-block';
@@ -948,27 +967,40 @@ Iterator : Random Access Iterator</code></pre>
         if (btnMore && btnLess) {
             btnMore.addEventListener('click', function() {
                 visibleCount += step;
-                if (visibleCount > cards.length) visibleCount = cards.length;
+                if (visibleCount > totalCards) visibleCount = totalCards;
                 updateVisibility();
                 
                 // Optional: Scroll down slightly so they know new things appeared
-                window.scrollBy({top: 300, left: 0, behavior: 'smooth'});
+                setTimeout(function() {
+                    window.scrollBy({top: 400, left: 0, behavior: 'smooth'});
+                }, 100);
             });
             
             btnLess.addEventListener('click', function() {
-                visibleCount -= step;
+                // Math: If we are at an odd number (like 13), drop down to the nearest multiple of 4 below it.
+                // If we are at a multiple of 4 (like 12 or 8), just subtract 4.
+                if (visibleCount % step !== 0) {
+                    visibleCount = visibleCount - (visibleCount % step);
+                } else {
+                    visibleCount -= step;
+                }
+                
                 if (visibleCount < minVisible) visibleCount = minVisible;
                 updateVisibility();
                 
                 // Scroll back up slightly
-                window.scrollBy({top: -300, left: 0, behavior: 'smooth'});
+                setTimeout(function() {
+                    window.scrollBy({top: -500, left: 0, behavior: 'smooth'});
+                }, 100);
             });
             
-            // Initialize
+            // Initialize immediately
+            cards.forEach(c => c.style.display = 'none'); // Pre-hide all
             updateVisibility();
         }
     });
 </script>
+
 
 </body>
 </html>
