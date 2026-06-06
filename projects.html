@@ -9,16 +9,16 @@
 
 
 <style>
-/* Modern, polished Modal styling */
-#project-modal {
+
+.modal-overlay {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
-    background: rgba(0, 43, 54, 0.85) !important; /* Solarized Dark backdrop */
+    background: rgba(0, 43, 54, 0.85) !important;
     backdrop-filter: blur(8px) !important;
-    z-index: 999999 !important;
+    z-index: 2147483647 !important;
     display: none;
     align-items: center !important;
     justify-content: center !important;
@@ -26,9 +26,14 @@
     transition: opacity 0.3s ease !important;
 }
 
-#project-modal[style*="display: flex"] {
+.modal-overlay[style*="display: flex"] {
     opacity: 1 !important;
 }
+
+/* Modern, polished Modal styling */
+
+
+
 
 .modal-content {
     background: var(--bg-primary, #fdf6e3) !important; /* Solarized Light base */
@@ -46,7 +51,7 @@
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
 }
 
-#project-modal[style*="display: flex"] .modal-content {
+.modal-overlay[style*="display: flex"] .modal-content {
     transform: translateY(0) !important;
 }
 
@@ -217,7 +222,7 @@
             
             <div class="projects-grid">
 
-                <div class="project-card featured" data-project="mcp-oauth">
+                <div onclick="openModal(this.getAttribute('data-project'))" class="project-card featured" data-project="mcp-oauth">
                     <div class="project-img"><img src="images/server.jpg" alt="MCP OAuth"></div>
                     <div class="project-content">
                         <span class="year">2026 - Present</span>
@@ -225,7 +230,7 @@
                         <p class="short-desc">Built Model Context Protocol (MCP) integrations with OAuth2 and user-level monitoring for internal applications.</p>
                     </div>
                 </div>
-<div class="project-card featured" data-project="cert-rotation">
+<div onclick="openModal(this.getAttribute('data-project'))" class="project-card featured" data-project="cert-rotation">
                     <div class="project-img"><img src="images/server.jpg" alt="CPS"></div>
                     <div class="project-content">
                         <span class="year">Dec 2024 - Present</span>
@@ -234,7 +239,7 @@
                     </div>
                 </div>
                 
-                <div class="project-card featured" data-project="delivery-automation">
+                <div onclick="openModal(this.getAttribute('data-project'))" class="project-card featured" data-project="delivery-automation">
                     <div class="project-img"><img src="images/code1.jpg" alt="Automation"></div>
                     <div class="project-content">
                         <span class="year">Dec 2024 - Present</span>
@@ -243,7 +248,7 @@
                     </div>
                 </div>
                 
-                <div class="project-card" data-project="log-analysis">
+                <div onclick="openModal(this.getAttribute('data-project'))" class="project-card" data-project="log-analysis">
                     <div class="project-img"><img src="images/data.jpg" alt="Log Analysis"></div>
                     <div class="project-content">
                         <span class="year">2023-2024</span>
@@ -252,7 +257,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" data-project="automation-library">
+                <div onclick="openModal(this.getAttribute('data-project'))" class="project-card" data-project="automation-library">
                     <div class="project-img"><img src="images/circuit.jpg" alt="Library"></div>
                     <div class="project-content">
                         <span class="year">2021-2023</span>
@@ -261,7 +266,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" data-project="trie-index">
+                <div onclick="openModal(this.getAttribute('data-project'))" class="project-card" data-project="trie-index">
                     <div class="project-img"><img src="images/peuler.jpeg" alt="Trie Engine"></div>
                     <div class="project-content">
                         <span class="year">Nov 2020</span>
@@ -270,7 +275,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" data-project="ltree">
+                <div onclick="openModal(this.getAttribute('data-project'))" class="project-card" data-project="ltree">
                     <div class="project-img"><img src="images/ltree.png" alt="LTree"></div>
                     <div class="project-content">
                         <span class="year">Mar 2020</span>
@@ -279,7 +284,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" data-project="rnn-captioning">
+                <div onclick="openModal(this.getAttribute('data-project'))" class="project-card" data-project="rnn-captioning">
                     <div class="project-img"><img src="images/edu.jpg" alt="RNN"></div>
                     <div class="project-content">
                         <span class="year">2018</span>
@@ -289,7 +294,7 @@
                 </div>
                 
 
-                <div class="project-card" data-project="sort">
+                <div onclick="openModal(this.getAttribute('data-project'))" class="project-card" data-project="sort">
                     <div class="project-img"><img src="images/sort.png" alt="Merge Sort"></div>
                     <div class="project-content">
                         <span class="year">2020</span>
@@ -298,7 +303,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" data-project="depth">
+                <div onclick="openModal(this.getAttribute('data-project'))" class="project-card" data-project="depth">
                     <div class="project-img"><img src="images/depth.png" alt="3D Depth"></div>
                     <div class="project-content">
                         <span class="year">2019-2020</span>
@@ -307,7 +312,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" data-project="compiler">
+                <div onclick="openModal(this.getAttribute('data-project'))" class="project-card" data-project="compiler">
                     <div class="project-img"><img src="images/comp.jpeg" alt="Compiler"></div>
                     <div class="project-content">
                         <span class="year">2019</span>
@@ -316,7 +321,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" data-project="mscloud">
+                <div onclick="openModal(this.getAttribute('data-project'))" class="project-card" data-project="mscloud">
                     <div class="project-img"><img src="images/mscloud.jpg" alt="Master Slave DB"></div>
                     <div class="project-content">
                         <span class="year">2020</span>
@@ -325,7 +330,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" data-project="peuler">
+                <div onclick="openModal(this.getAttribute('data-project'))" class="project-card" data-project="peuler">
                     <div class="project-img"><img src="images/peuler.webp" alt="Project Euler"></div>
                     <div class="project-content">
                         <span class="year">Ongoing</span>
@@ -354,13 +359,7 @@
 
 
 
-<!-- HARDCODED MODAL HTML -->
-<div id="project-modal">
-    <div class="modal-content">
-        <span class="modal-close">&times;</span>
-        <div class="modal-body"></div>
-    </div>
-</div>
+
 
 
 <script>
@@ -547,6 +546,304 @@ Iterator : Random Access Iterator</code></pre><h4>Complexity of Operation on ite
 });
 </script>
 
+
+
+    <!-- DYNAMIC MODALS (HARDCODED IN HTML) -->
+    
+    <div class="modal-overlay" id="modal-cert-rotation">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-cert-rotation')">X</button>
+            <div class="modal-body">
+                <h2 class="major">Emergency Certificate Rotation (CPS)</h2>
+                <p>Designed and built an automated certificate rotation pipeline for Akamai's Certificate Provisioning System (CPS). When a Certificate Authority marks a specific batch of certificates as vulnerable, this system kicks in to rotate them securely without manual intervention, drastically reducing toil and improving security posture.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-delivery-automation">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-delivery-automation')">X</button>
+            <div class="modal-body">
+                <h2 class="major">Software Delivery Automation</h2>
+                <p>Architected a full-stack application for end-to-end deployment, testing, and monitoring across multiple internal Akamai services.</p>
+                <p>This automation significantly streamlines the delivery pipeline by removing manual bottlenecks and unifying disparate workflows.</p>
+                <ul>
+                    <li>Reduced weekly manual toil by <strong>95%</strong> (from 3 hours to 9 minutes).</li>
+                    <li>Unified deployment workflows across multiple internal services.</li>
+                    <li>Built robust end-to-end testing and monitoring hooks.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-mcp-oauth">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-mcp-oauth')">X</button>
+            <div class="modal-body">
+                <h2 class="major">MCP Integrations for Akamai Internal Services & Edgegrid</h2>
+                <p>Developed multiple Model Context Protocol (MCP) servers to bridge Akamai's infrastructure with AI tooling:</p>
+                <ol>
+                    <li><strong>OAuth2 & Telemetry:</strong> Built an MCP with robust OAuth2 handling and user-level monitoring tailored for internal applications and services used by Akamai employees.</li>
+                    <li><strong>Edgegrid MCP:</strong> Engineered an MCP specifically targeting Akamai Products that leverage Edgegrid APIs, exposing capabilities to secure AI environments.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-log-analysis">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-log-analysis')">X</button>
+            <div class="modal-body">
+                <h2 class="major">LOW LATENCY LOG ANALYSIS AND VISUALIZATION</h2>
+                <ol>
+                    <li>Developed efficient way to analyse millions of rows and dynamically update top 5% CP Code for all the service provided by Akamai.</li>
+                    <li>Created job for inserting hourly and daily aggregation of all metrics to the database optimally.</li>
+                    <li>Working on automated analysis and reporting of probable cause for any anomaly seen in the service.</li>
+                    <li>Currently using Clickhouse as intermediatary databse and Apache Superset for visualization</li>
+                </ol>
+                <p>On Going Project ...</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-automation-library">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-automation-library')">X</button>
+            <div class="modal-body">
+                <h2 class="major">Python Automation Library</h2>
+                <ul>
+                    <li>Developed python interface for Grafana and databases like Clickhouse and modified Apache Cassandra. Added functionality to provide baselines for the metrics extracted from monitoring tools.</li>
+                    <li>Managed application and created visual representation for metrics provided from the application.</li>
+                    <li>Working on automated data analysis and visualization of low latency logs from Akamai network</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-trie-index">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-trie-index')">X</button>
+            <div class="modal-body">
+                <h2 class="major">Trie-Based Inverted Index Engine</h2>
+                <p>Using trie data structure to store inverted index and results in faster document search engine of words and wild cards.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-ltree">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-ltree')">X</button>
+            <div class="modal-body">
+                <h2 class="major">Introduction to Fast Data Structure LTree</h2>
+                <h3 class="major">Introduction</h3>
+                <p>The chosen data structure is called LTree. Ltree grows like a tree and children are stored as a list, hence the name LTree (L -> list and Tree). This data structure is inspired by a data structure called VList which means vector of list. Our LTree is similar in some way but makes insertion faster.</p>
+                <p><h3><a href="https://github.com/kaybee1928/Ltree">GitHub - https://github.com/kaybee1928/Ltree</a></h3></p>
+                <h3 class="major">Summary</h3>
+                <p>As mentioned before LTree has a data part and stores children in the form of a list. Number of elements in children grows exponentially i.e., 1, 2, 4, 8, ... . (child-1 has 1 element, child-2 has 2 elements, child-3 has 4 elements, child-4 has 8 elements, …). This data structure can be used when we need fast random access along with fast insertion.</p>
+                <pre><code>Let m = log(n)+log(n/2)+log(n/4)... until log gives 1.
+for 2^64 = 18446744073709551616 elements we get m = 64+63+...+1 = 2080
+Iterator : Random Access Iterator</code></pre>
+                <h4>Complexity of Operation on iterator and Object:</h4>
+                <table>
+                    <tr><th>Operator</th><th>Complexity</th></tr>
+                    <tr><td>++, --</td><td>O(1)</td></tr>
+                    <tr><td>+x, -x</td><td>O(1) best case, O(m) worst_case</td></tr>
+                    <tr><td>-iterator</td><td>O(m)</td></tr>
+                    <tr><td>Insertion at given position</td><td>O(m)</td></tr>
+                    <tr><td>push_back</td><td>O(1) Best case,O(log(n)) worst case</td></tr>
+                    <tr><td>pop, indexing</td><td>O(m)</td></tr>
+                </table>
+                <h3 class="major">Example</h3>
+                <p>For data = {1, 4, 5, 6, 8, 9, 10, 3, 2, 5, 12}, LTree is in below figure</p>
+                <div style="text-align: center;"><img src="images/ltree2.png" alt="ltree main Example" /></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-rnn-captioning">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-rnn-captioning')">X</button>
+            <div class="modal-body">
+                <h2 class="major">Internship at CDSAML, PES University</h2>
+                <p>CDSAML(Center for Data Sciences and Applied Machine Learning)</p>
+                <ul>
+                    <li>Implemented a model with hierarchical recurrent neural network to generate descriptive paragraph on an image. The model has a sentence RNN receives the image features, decides how many sentences to generate in the resulting paragraph, and produces an input topic vector for each sentence. This topic vector is then used by word RNN to generate the words of a single sentence. Predicted sentence had 13.6 METEOR score and BLEU-1 of 34.4%.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-sort">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-sort')">X</button>
+            <div class="modal-body">
+                <h2 class="major">Fast Merge Sort (ARootSort)</h2>
+                <p>ARoot Sort is a highly optimised merge sort which performes two different kinds of merge sort based on degree of sortedness of input after subarray reversing. It is a stable sort and outperforms std::sort that implements introsort by a small margin</p>
+                <p><h3><a href="https://github.com/kaybee1928/ARoot-Sort">GitHub - https://github.com/kaybee1928/ARoot-Sort</a></h3></p>
+                <h3 class="major">Algorithm</h3>
+                <h4>ARootSort</h4>
+                <pre><code>1. array_iterator_1 = 0;
+2. array_iterator_2 = start + 1;
+//It is not proved to be optimal, just intuitively taken
+3. optimal_near_sorted_parameter = (log(end-start)/log(2));
+4. number_of_decreasing_subarray = 0;
+5. for iterator = start + 1 to end
+        while (array_iterator_2 < end) &&
+               (array[array_iterator_2 - 1] > array[array_iterator_2]) do
+            array_iterator_2++;
+        if array_iterator_2 - array_iterator_1 > 1 then
+            arrayReverse(array ,array_iterator_1, array_iterator_2);
+            number_of_decreasing_subarray++;
+        array_iterator_1 = array_iterator_2;
+6. if number_of_decreasing_subarray <= optimal_near_sorted_parameter then
+        ARootMergeV1(array, start, end);
+7. else
+        ARootMergeV2(array, start, end);</code></pre>
+                <h4>ARootMergerV1 (a[] , p , q):</h4>
+                <pre><code>1. merge_iterator_start = start;
+2. merge_iterator_middle = start;
+3. merge_iterator_end = start + 1;
+4. isMerge = false;
+5. number_of_sorted_subarray = 0;
+6. while true do
+        while (merge_iterator_end < end) &&
+              (array[merge_iterator_end] >= array[merge_iterator_end - 1]) do
+            merge_iterator_end++;
+        if isMerge then
+            Merge(array, merge_iterator_start, merge_iterator_middle, merge_iterator_end);
+            merge_iterator_start = merge_iterator_end;
+            merge_iterator_end++;
+            isMerge = false;
+        else
+            isMerge = true;
+            merge_iterator_middle = merge_iterator_end;
+            merge_iterator_end++;
+            number_of_sorted_subarray++;
+            if merge_iterator_middle >= end then
+                if number_of_sorted_subarray < 2 then
+                    return;
+                else
+                    number_of_sorted_subarray = 0;
+                    merge_iterator_start = start;
+                    merge_iterator_middle = start;
+                    merge_iterator_end = start + 1;
+                    isMerge = false;</code></pre>
+                <h4>ARootMergerV2 (a[] , p , q):</h4>
+                <pre><code>1. merge_iterator_start = 0;
+2. merge_iterator_middle = 0;
+3. merge_iterator_end = 0;
+4. step_counter = 1;
+5. list sorted_subarray_end_points;
+6. sorted_subarray_end_points.add(0);
+7. for iterator = start + 1 to end
+        while (iterator < end) && (array[iterator] >= array[iterator - 1]) do
+            iterator++;
+        sorted_subarray_end_points.add(iterator);
+8. if sorted_subarray_end_points[sorted_subarray_end_points.size() - 1] != end then
+        sorted_subarray_end_points.add(end);
+9. number_of_sorted_subarray = (int)sorted_subarray_end_points.size() - 1;
+10. while true do
+        merge_iterator_start = 0;
+        merge_iterator_middle = merge_iterator_start + step_counter;
+        merge_iterator_end = minimim(merge_iterator_middle + step_counter, number_of_sorted_subarray);
+        if merge_iterator_middle >= number_of_sorted_subarray then
+            return
+        while merge_iterator_middle < number_of_sorted_subarray do
+            Merge(array, sorted_subarray_end_points[merge_iterator_start], sorted_subarray_end_points[merge_iterator_middle], sorted_subarray_end_points[merge_iterator_end]);
+            merge_iterator_start = merge_iterator_end;
+            merge_iterator_middle = merge_iterator_start + step_counter;
+            merge_iterator_end = minimum(merge_iterator_middle + step_counter, number_of_sorted_subarray);
+        step_counter = step_counter * 2</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-depth">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-depth')">X</button>
+            <div class="modal-body">
+                <h2 class="major">EXTRACTING AND RENDERING 3D STRUCTURE AND ORIENTATION OF OBJECTS FROM 2D IMAGES</h2>
+                <h3 class="major">Abstract</h3>
+                <p>This work explores extraction of spatial orientation and geometric structure of objects and landscapes from 2D images using Deep Neural Networks and Stereo Vision based approaches, to render the structure in 3D space to aid in various application in the field of Virtual and Augmented Reality. Regular 2D images are used to generate a Depth Map using Deep Neural Networks or Stereo Vision, which can then be used to model the 3D structure of the objects in the image.</p>
+                <h3 class="major">Introduction</h3>
+                <p>Representation of the world in a three dimensional form virtually has various advantages in the field of medical modelling, terrain mapping and building realistic maps for multi player video games. It could be used to aid doctors in creating simulations of surgical procedures. Three dimensional terrain mapping could potentially help defense personnel understand the terrain in treacherous regions. Furthermore, 3d modelling could aid video game enthusiasts in providing realistic gaming experiance.</p>
+                <p>This work aims to obtain 3D Point Clouds of real-world objects, using only 2D images of the object, without the aid of any special sensors such as the Kinect sensor. This can be done by generating multiple Depth Maps of the various images taken of the object from various viewpoints and using those Depth Maps to generate a 3D Point Cloud of the object.</p>
+                <p>Existing techniques to generate/render 3D structure and orientation of objects from 2D images use a combination of interpolation algorithms and Deep Learning Models based on Convolution Neural Networks. Convolution Neural Networks deal with scalars and focus on the features in the images as opposed to orientations. This leads to issues such as inaccurate depth and noise and holes in the output when generating the Depth Maps of the Input Images as can be observed.</p>
+                <h3 class="major">GitHub Links</h3>
+                <p><h4><a href="https://github.com/kaybee1928/2Dto3D">GitHub - https://github.com/kaybee1928/2Dto3D</a></h4>
+                <h4>Forked from our main project repository:</h4>
+                <h4><a href="https://github.com/Its-a-me-Ashwin/2Dto3D">GitHub - https://github.com/Its-a-me-Ashwin/2Dto3D</a></h4></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-compiler">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-compiler')">X</button>
+            <div class="modal-body">
+                <h2 class="major">Compiler Design</h2>
+                <p>Simple working compiler for C type language. Supports use of while loop and conditional statement and optimises the code by removing unwanted lines and variables.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-mscloud">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-mscloud')">X</button>
+            <div class="modal-body">
+                <h2 class="major">Database orchestrator with master-slave architecture</h2>
+                <p>Implemented highly available and fault tolerant Database as a Service using master-slave architecture</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-peuler">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-peuler')">X</button>
+            <div class="modal-body">
+                <h2 class="major">Project Euler</h2>
+                <p>Mathemaical problems solved with coding. This involves using many algorithms and mathematical formlae to overcome the high complexity of the problem.</p>
+            </div>
+        </div>
+    </div>
+
+
+<script>
+    function openModal(id) {
+        var m = document.getElementById('modal-' + id);
+        if (m) {
+            m.style.setProperty('display', 'flex', 'important');
+            m.style.setProperty('opacity', '1', 'important');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+    
+    function closeModal(modalId) {
+        var m = document.getElementById(modalId);
+        if (m) {
+            m.style.setProperty('display', 'none', 'important');
+            m.style.setProperty('opacity', '0', 'important');
+            document.body.style.overflow = '';
+        }
+    }
+
+    // Attach click listeners to cards natively
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.project-card').forEach(function(card) {
+            card.setAttribute('onclick', "openModal('" + card.getAttribute('data-project') + "')");
+            card.style.cursor = "pointer";
+        });
+        
+        // Background click to close
+        document.querySelectorAll('.modal-overlay').forEach(function(m) {
+            m.addEventListener('click', function(e) {
+                if(e.target === this) {
+                    closeModal(this.id);
+                }
+            });
+        });
+    });
+</script>
 
 </body>
 </html>
