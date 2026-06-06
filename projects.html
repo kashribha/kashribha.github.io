@@ -808,42 +808,73 @@ Iterator : Random Access Iterator</code></pre>
     </div>
 
 
+
 <script>
+    // Global variable to track if ANY modal is currently open
+    var isModalOpen = false;
+
     function openModal(id) {
+        if (isModalOpen) return; // Prevent opening multiple at once
         var m = document.getElementById('modal-' + id);
         if (m) {
             m.style.setProperty('display', 'flex', 'important');
-            m.style.setProperty('opacity', '1', 'important');
-            document.body.style.overflow = 'hidden';
+            setTimeout(function() {
+                m.style.setProperty('opacity', '1', 'important');
+            }, 10);
+            document.body.style.overflow = 'hidden'; // Stop background scrolling
+            isModalOpen = true;
         }
     }
     
-    function closeModal(modalId) {
+    function closeModal(modalId, event) {
+        if (event) {
+            event.stopPropagation(); // Stop click from hitting elements underneath
+        }
         var m = document.getElementById(modalId);
         if (m) {
-            m.style.setProperty('display', 'none', 'important');
             m.style.setProperty('opacity', '0', 'important');
-            document.body.style.overflow = '';
+            setTimeout(function() {
+                m.style.setProperty('display', 'none', 'important');
+                document.body.style.overflow = ''; // Restore background scrolling
+                isModalOpen = false;
+            }, 300); // Wait for fade out animation
         }
     }
 
-    // Attach click listeners to cards natively
     document.addEventListener('DOMContentLoaded', function() {
+        // Fix project cards to pass event correctly
         document.querySelectorAll('.project-card').forEach(function(card) {
-            card.setAttribute('onclick', "openModal('" + card.getAttribute('data-project') + "')");
-            card.style.cursor = "pointer";
+            card.onclick = function(e) {
+                e.preventDefault();
+                e.stopPropagation(); // Stop click from bubbling
+                openModal(this.getAttribute('data-project'));
+            };
+        });
+        
+        // Fix close buttons to pass event correctly
+        document.querySelectorAll('.modal-close').forEach(function(btn) {
+            btn.onclick = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                var overlayId = this.closest('.modal-overlay').id;
+                closeModal(overlayId, e);
+            };
         });
         
         // Background click to close
         document.querySelectorAll('.modal-overlay').forEach(function(m) {
-            m.addEventListener('click', function(e) {
+            m.onclick = function(e) {
+                // Only close if we clicked the dark overlay itself, NOT the content inside it
                 if(e.target === this) {
-                    closeModal(this.id);
+                    e.preventDefault();
+                    e.stopPropagation();
+                    closeModal(this.id, e);
                 }
-            });
+            };
         });
     });
 </script>
+
 
 </body>
 </html>
