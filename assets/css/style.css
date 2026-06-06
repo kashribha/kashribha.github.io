@@ -209,7 +209,7 @@ h1 span {
 }
 
 .project-card {
-background: var(--bg-alt);
+  background: var(--bg-alt);
   border-radius: 12px;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -218,7 +218,7 @@ background: var(--bg-alt);
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  min-height: 520px; /* Make the whole card larger */
+  min-height: 800px; /* Massively increased to accommodate the giant image */
 }
 
 .project-card:hover {
@@ -228,7 +228,7 @@ background: var(--bg-alt);
 }
 
 .project-img {
-height: 280px; /* Increased image height even more */
+height: 560px; /* Doubled from 280px */
     width: 100%;
     background-color: var(--base2);
     display: flex;
