@@ -650,22 +650,20 @@ Iterator : Random Access Iterator</code></pre>
     // --- NATIVE MODAL LOGIC ---
     var isModalOpen = false;
 
-    function openModal(id) {
+    // Define globally
+    window.openModal = function(id) {
         if (isModalOpen) return;
         var m = document.getElementById('modal-' + id);
         if (m) {
             m.style.setProperty('display', 'flex', 'important');
-            
-            // Force browser reflow so it registers the "display: flex" BEFORE the opacity change
             void m.offsetWidth; 
-            
             m.style.setProperty('opacity', '1', 'important');
             document.body.classList.add('modal-open');
             isModalOpen = true;
         }
-    }
+    };
     
-    function closeModal(modalId, event) {
+    window.closeModal = function(modalId, event) {
         if (event) {
             event.preventDefault();
             event.stopPropagation();
@@ -673,36 +671,21 @@ Iterator : Random Access Iterator</code></pre>
         var m = document.getElementById(modalId);
         if (m) {
             m.style.setProperty('opacity', '0', 'important');
-            
-            // Wait exactly for the CSS transition time (300ms) before hiding
             setTimeout(function() {
                 m.style.setProperty('display', 'none', 'important');
                 document.body.classList.remove('modal-open');
                 isModalOpen = false;
             }, 300);
         }
-    }
+    };
 
-    // Attach strict click listeners to overlays to stop bubbling
     document.addEventListener('DOMContentLoaded', function() {
-        // FALLBACK: Manually attach click listeners to all cards if the HTML onclick fails
-        document.querySelectorAll('.project-card').forEach(function(card) {
-            card.addEventListener('click', function(e) {
-                e.preventDefault();
-                openModal(this.getAttribute('data-project'));
-            });
-        });
-
         document.querySelectorAll('.modal-overlay').forEach(function(m) {
             m.onclick = function(e) {
                 if(e.target === this) {
-                    e.preventDefault();
-                    e.stopPropagation();
                     closeModal(this.id, e);
                 }
             };
-            
-            // Stop scroll events from bubbling
             m.addEventListener('wheel', function(e) { e.stopPropagation(); }, {passive: false});
             m.addEventListener('touchmove', function(e) { e.stopPropagation(); }, {passive: false});
         });
@@ -736,6 +719,9 @@ Iterator : Random Access Iterator</code></pre>
         
         function updateVisibility() {
             cards.forEach(function(card, index) {
+                // Ensure display flex is ON always
+                card.style.display = 'flex';
+                
                 if (index < visibleCount) {
                     card.classList.remove('hide-card');
                 } else {
