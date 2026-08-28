@@ -2,7 +2,21 @@
 
 Personal portfolio site for **K Shrinidhi Bhagavath** — Senior Software Engineer at Akamai Technologies, Bangalore.
 
-Specializing in low-level systems, distributed platforms, and optimization.
+Specializing in Python platform engineering, developer tooling, distributed platforms, and optimization.
+
+---
+
+## Featured work
+
+The public project cards and experience timeline summarize evidence-backed work. They intentionally distinguish production experience from project work and omit sensitive implementation details.
+
+- **MCP servers and developer tooling:** Owned an internal MCP server for approximately 20 active users across SRE, DevOps, and development. Implemented a customer-facing MCP server in alpha for a limited customer cohort. Together, the servers handle approximately 100K requests/month and integrate developer, data, observability, log-analysis, and anomaly-analysis workflows.
+- **Emergency Certificate Rotation (CPS):** Designed and implemented a Python workflow for vulnerable CA-key incidents spanning batches of approximately **1K–20K certificates**, with CPS API integration and safety gates.
+- **Log analysis and infrastructure migration:** Contributed to Scala/Spark ETL and aggregation work processing approximately 200K aggregated rows every five minutes across approximately 70K active CP codes. Contributed to the Databricks-to-Linode migration on a **50-node** Kubernetes cluster (40 ETL nodes and 10 aggregation nodes).
+- **Observability and automation:** Automated monitoring of eight DevOps dashboards spanning approximately 1,200 metrics and 12,000 metric rows. Alerting identified deployment restart counts within 15 minutes rather than the 1–6 hours required by manual verification; a weekly DevOps deployment workflow was automated from three hours to nine minutes.
+- **C++ project work:** The portfolio includes systems projects such as a trie-based index and LTree hybrid data structure. These are project-based C++ work, not a claim of professional C++ employment.
+
+Data-volume figures that have not been verified are deliberately excluded.
 
 ---
 
@@ -22,7 +36,6 @@ kashribha.github.io/
 │   ├── js/
 │   │   └── main.js               — Grid trail, parallax, modals, pagination
 │   └── webfonts/                 — Font Awesome web fonts
-├── images/               — Project thumbnails and profile pictures
 ├── CODE_AUDIT.md         — Code quality audit report
 └── README.md             — This file
 ```

@@ -45,7 +45,7 @@
                     <div class="project-content">
                         <span class="year-badge">2026 – Present</span>
                         <h3>MCP with OAuth2 &amp; Monitoring</h3>
-                        <p class="short-desc">Owned Akamai's internal MCP server and built the customer-facing MCP server implementation, with OAuth2 and user-level monitoring.</p>
+                        <p class="short-desc">Owned Akamai's internal MCP server for 20 active users and built the customer-facing MCP server in alpha; together they handle ~100K requests/month.</p>
                     </div>
                 </div>
 
@@ -57,7 +57,7 @@
                     <div class="project-content">
                         <span class="year-badge">Dec 2024 – Present</span>
                         <h3>Emergency Certificate Rotation (CPS)</h3>
-                        <p class="short-desc">Automated certificate rotation pipeline for Akamai CPS to handle CA vulnerability markups globally without manual intervention.</p>
+                        <p class="short-desc">Python emergency certificate rotation workflow for Akamai CPS, with safety gates for vulnerable CA-key incidents spanning 1K–20K certificates.</p>
                     </div>
                 </div>
 
@@ -69,7 +69,7 @@
                     <div class="project-content">
                         <span class="year-badge">Dec 2024 – Present</span>
                         <h3>Software Delivery Automation</h3>
-                        <p class="short-desc">Full-stack application for end-to-end deployment, testing, and monitoring — reducing weekly manual toil by 95%.</p>
+                        <p class="short-desc">Automated weekly DevOps deployment workflow from 3 hours to 9 minutes.</p>
                     </div>
                 </div>
 
@@ -81,7 +81,7 @@
                     <div class="project-content">
                         <span class="year-badge">2023–2024</span>
                         <h3>Low Latency Log Analysis &amp; Kubernetes</h3>
-                        <p class="short-desc">High-throughput data pipeline migrated to a self-managed Kubernetes Spark Cluster on Linode to analyze millions of rows.</p>
+                        <p class="short-desc">Scala/Spark log-analysis pipeline producing ~200K aggregated rows every five minutes across ~70K active CP codes, migrated to a 50-node Linode Kubernetes cluster.</p>
                     </div>
                 </div>
 
@@ -93,7 +93,7 @@
                     <div class="project-content">
                         <span class="year-badge">2021–2023</span>
                         <h3>Python Automation Library</h3>
-                        <p class="short-desc">Concurrent Python automation library with abstract statistical models, reducing manual monitoring effort by 75%.</p>
+                        <p class="short-desc">Concurrent Python monitoring library and dashboards across ~1,200 metrics and ~12,000 metric rows, enabling restart alerts within 15 minutes instead of 1–6 hours of manual verification.</p>
                     </div>
                 </div>
 
@@ -225,7 +225,7 @@
             <button class="modal-close" onclick="closeModal('modal-mcp-oauth', event)" aria-label="Close">&times;</button>
             <div class="modal-body">
                 <h2>MCP Servers for Akamai Internal Services &amp; Edgegrid</h2>
-                <p>Owned the internal Akamai MCP server end-to-end and implemented the customer-facing MCP server (beta tech preview), bridging Akamai's infrastructure with AI tooling:</p>
+                <p>Owned the internal Akamai MCP server end-to-end for 20 active users across SRE, DevOps, and development, and implemented the customer-facing MCP server in alpha for a limited customer cohort. Together, the servers handle ~100K requests/month.</p>
                 <ol>
                     <li><strong>OAuth2 &amp; Telemetry:</strong> Built an MCP with robust OAuth2 handling and user-level monitoring tailored for internal applications and services used by Akamai employees. Includes per-user request tracing and audit logging.</li>
                     <li><strong>Edgegrid MCP:</strong> Engineered an MCP specifically targeting Akamai Products that leverage Edgegrid APIs, exposing secure, authenticated capabilities to AI environments.</li>
@@ -239,7 +239,7 @@
             <button class="modal-close" onclick="closeModal('modal-cert-rotation', event)" aria-label="Close">&times;</button>
             <div class="modal-body">
                 <h2>Emergency Certificate Rotation (CPS)</h2>
-                <p>Designed and built an automated certificate rotation pipeline for Akamai's Certificate Provisioning System (CPS). When a Certificate Authority (DigiCert / Let's Encrypt) marks a specific batch of certificates as vulnerable, this system triggers to rotate them securely without manual intervention.</p>
+                <p>Designed and built a Python emergency certificate rotation workflow for Akamai's Certificate Provisioning System (CPS). It automates secure rotations for CA-key incidents across batches spanning 1K–20K certificates, with CPS API integration and safety gates.</p>
                 <h3>Key Highlights</h3>
                 <ul>
                     <li>Automated detection of CA-flagged vulnerable certificate batches via event-driven triggers.</li>
@@ -257,10 +257,10 @@
             <button class="modal-close" onclick="closeModal('modal-delivery-automation', event)" aria-label="Close">&times;</button>
             <div class="modal-body">
                 <h2>Software Delivery Automation</h2>
-                <p>Architected a full-stack application for end-to-end deployment, testing, and monitoring across multiple internal Akamai services.</p>
+                <p>Automated the weekly DevOps deployment workflow, replacing a manual process with an integrated workflow for deployment status and restart analysis.</p>
                 <p>This automation significantly streamlines the delivery pipeline by removing manual bottlenecks and unifying disparate workflows.</p>
                 <ul>
-                    <li>Reduced weekly manual toil by <strong>95%</strong> (from 3 hours to 9 minutes).</li>
+                    <li>Automated the weekly DevOps deployment workflow from 3 hours to 9 minutes.</li>
                     <li>Unified deployment workflows across multiple internal services.</li>
                     <li>Built robust end-to-end testing and monitoring hooks.</li>
                     <li>Integrated with CI/CD pipeline for automated release gating.</li>
@@ -275,12 +275,12 @@
             <div class="modal-body">
                 <h2>Low Latency Log Analysis and Visualization</h2>
                 <ol>
-                    <li>Developed efficient way to analyse millions of rows and dynamically update top 5% CP Code for all the services provided by Akamai.</li>
+                    <li>Developed high-throughput log analysis and anomaly detection producing ~200K aggregated rows every five minutes across ~70K active CP codes (~200K total), used by DevOps and SRE.</li>
                     <li>Created job for inserting hourly and daily aggregation of all metrics to the database optimally.</li>
                     <li>Working on automated analysis and reporting of probable cause for any anomaly seen in the service.</li>
                     <li>Currently using Clickhouse as intermediary database and Apache Superset for visualization.</li>
                 </ol>
-                <p>Ongoing project — migrated from DataBricks to a self-managed Kubernetes Spark Cluster on Linode for cost efficiency and control.</p>
+                <p>Contributed to migrating Scala/Spark ETL and aggregation work from Databricks to a 50-node self-managed Kubernetes Spark Cluster on Linode (40 ETL nodes and 10 aggregation nodes).</p>
             </div>
         </div>
     </div>
@@ -291,9 +291,9 @@
             <div class="modal-body">
                 <h2>Python Automation Library</h2>
                 <ul>
-                    <li>Developed Python interface for Grafana and databases like Clickhouse and modified Apache Cassandra. Added functionality to provide baselines for the metrics extracted from monitoring tools.</li>
-                    <li>Managed application and created visual representation for metrics provided from the application.</li>
-                    <li>Implemented concurrent data gathering pipeline with abstract statistical and ML models — adoption reduced manual monitoring effort by <strong>75%</strong>.</li>
+                    <li>Automated monitoring of 8 DevOps dashboards spanning ~1,200 metrics and ~12,000 metric rows; enabled SRE and CPS alerting that surfaced deployment restart counts within 15 minutes instead of 1–6 hours of manual verification.</li>
+                    <li>Managed the monitoring application and surfaced metrics for operational review.</li>
+                    <li>Implemented concurrent data gathering pipelines with abstract statistical models for monitoring workflows.</li>
                     <li>Working on automated data analysis and visualization of low latency logs from Akamai network.</li>
                 </ul>
             </div>
